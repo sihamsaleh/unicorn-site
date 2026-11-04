@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>تواصل معنا | مجموعة يونيكورن</title>
+<meta name="description" content="تواصل مع مجموعة يونيكورن في المدينة المنورة.">
+<meta property="og:title" content="تواصل معنا | مجموعة يونيكورن">
+<meta property="og:image" content="assets/img/hero-1.jpg">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a href="index.html" class="logo" aria-label="مجموعة يونيكورن — الرئيسية"></a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a class="navlink" href="about.html">من نحن</a><a class="navlink" href="services.html">خدماتنا</a><a class="navlink" href="reports.html">الدراسات والتقارير</a><a class="navlink" href="opportunities.html">الفرص الاستثمارية</a>
+      <a href="contact.html" class="btn btn-light" aria-current="page">تواصل معنا</a>
+      <button class="burger" id="burger" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+<div class="mnav" id="mnav">
+  <div><h5>MENU</h5><a href="index.html">الرئيسية</a><a href="about.html">من نحن</a><a href="services.html">خدماتنا</a><a href="reports.html">الدراسات والتقارير</a><a href="opportunities.html">الفرص الاستثمارية</a></div>
+  <div><a href="contact.html" class="btn btn-light" style="font-size:15px" aria-current="page">تواصل معنا</a></div>
+</div>
+
+<main id="top">
+  <section class="phero">
+    <img src="assets/img/hero-1.jpg" srcset="assets/img/hero-1-sm.jpg 836w, assets/img/hero-1.jpg 1672w" sizes="100vw" alt="" style="object-position:50% 62%">
+    <div class="wrap">
+      <span class="eyebrow">CONTACT US</span>
+      <h1>تواصل معنا</h1>
+      <p>لمناقشة فرصة استثمارية، أو طلب دراسة، أو عرض موقعك.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap contact">
+      <div class="c-info rv">
+        <div><h3>البريد الإلكتروني</h3><span class="sel">PR@unicorn.com.sa</span><button class="copy" data-copy="PR@unicorn.com.sa">نسخ</button></div>
+        <div><h3>الاستفسارات العامة</h3><span class="sel">info@unicorn.com.sa</span><button class="copy" data-copy="info@unicorn.com.sa">نسخ</button></div>
+        <div><h3>العنوان</h3><address>8991 هانئ بن سعيد النخعي، المذينب<br>المدينة المنورة 42381 – 4851، المملكة العربية السعودية</address></div>
+        <div><h3>تابعنا</h3><div class="c-social">
+          <a href="https://x.com/unicorn_1sa" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.3l-4.9-6.4L6.2 22H3l7.3-8.4L1 2h6.4l4.4 5.8L18.9 2zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20z"/></svg></a>
+          <a href="https://www.linkedin.com/company/unicorn-ksa" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/></svg></a>
+        </div></div>
+      </div>
+
+      <form class="form rv d1" id="cform" novalidate>
+        <div class="full"><label id="tl">الموضوع</label>
+          <div class="topics" role="radiogroup" aria-labelledby="tl">
+            <label><input type="radio" name="topic" id="t1" value="استشارة" checked><span>استشارة</span></label>
+            <label><input type="radio" name="topic" id="t2" value="فرصة استثمارية"><span>فرصة استثمارية</span></label>
+            <label><input type="radio" name="topic" id="t3" value="اعرض موقعك"><span>اعرض موقعك</span></label>
+            <label><input type="radio" name="topic" id="t4" value="التقارير"><span>التقارير</span></label>
+          </div>
+        </div>
+        <label>الاسم<input id="fname" name="fname" autocomplete="name" required></label>
+        <label>رقم الجوال<input id="fphone" name="fphone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="05xxxxxxxx"></label>
+        <label class="full">البريد الإلكتروني<input id="femail" name="femail" type="email" autocomplete="email" dir="ltr"></label>
+        <label class="full">رسالتك<textarea id="fmsg" name="fmsg" required placeholder="مثال: أرض 5,000 م² في حي الشفاء وأرغب في دراسة مبدئية"></textarea></label>
+        <p class="err full" id="cerr" role="alert"></p>
+        <button type="submit" class="btn">أرسل الرسالة</button>
+        <div class="done" id="cdone" hidden><b>رسالتك جاهزة.</b> فتحنا لك تطبيق البريد لإرسالها إلى PR@unicorn.com.sa. إذا ما انفتح، <a id="cmail" href="mailto:PR@unicorn.com.sa" style="color:var(--brand);border-bottom:1px solid">اضغط هنا</a> أو انسخ البريد وأرسل رسالتك مباشرة.</div>
+      </form>
+    </div>
+
+    <div class="wrap">
+      <a class="map-card rv" href="https://www.google.com/maps/search/?api=1&amp;query=Mudhainib+Medina+42381" target="_blank" rel="noopener">
+        <img src="assets/img/sunset.jpg" alt="" loading="lazy" style="object-position:50% 75%">
+        <div class="wrap-in"><div><span class="eyebrow" style="opacity:.8">LOCATION</span><h3>المذينب، المدينة المنورة</h3></div><span class="btn btn-light">افتح في الخرائط</span></div>
+      </a>
+    </div>
+  </section>
+</main>
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-top">
+      <div><span class="logo" role="img" aria-label="مجموعة يونيكورن"></span></div>
+      <div>
+        <h4>المجموعة</h4>
+        <ul><li><a href="about.html">من نحن</a></li><li><a href="services.html">خدماتنا</a></li><li><a href="contact.html">تواصل معنا</a></li></ul>
+      </div>
+      <div>
+        <h4>الاستثمار</h4>
+        <ul><li><a href="reports.html">الدراسات والتقارير العقارية</a></li><li><a href="opportunities.html">الفرص الاستثمارية</a></li><li><a href="opportunities.html#list">اعرض موقعك</a></li></ul>
+      </div>
+      <div>
+        <h4>العنوان</h4>
+        <address>
+          8991 هانئ بن سعيد النخعي، المذينب<br>
+          المدينة المنورة 42381 – 4851<br>
+          المملكة العربية السعودية<br>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Mudhainib+Medina+42381" target="_blank" rel="noopener" style="border-bottom:1px solid rgba(255,255,255,.4)">عرض على الخريطة</a>
+        </address>
+      </div>
+    </div>
+    <div class="ftr-bot">
+      <span>© 2026 مجموعة يونيكورن. جميع الحقوق محفوظة.</span>
+      <p>المحتوى المنشور على هذا الموقع لأغراض المعرفة العامة ولا يُعدّ استشارةً استثمارية. لا تمارس المجموعة أنشطة الصناديق المرخّصة من هيئة السوق المالية.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>
