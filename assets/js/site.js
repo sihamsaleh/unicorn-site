@@ -78,6 +78,18 @@
     window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
   });
 
+  // Spotlight glow on the opportunity cards: follows the pointer across all three
+  var gcards=$$('.opps .card');
+  if(gcards.length && matchMedia('(hover:hover)').matches){
+    gcards.forEach(function(c){var s=document.createElement('span');s.className='spot';s.setAttribute('aria-hidden','true');c.appendChild(s)});
+    var gx=0,gy=0,graf=0;
+    var gpaint=function(){graf=0;gcards.forEach(function(c){var r=c.getBoundingClientRect();
+      c.style.setProperty('--x',(gx-r.left).toFixed(0)+'px');c.style.setProperty('--y',(gy-r.top).toFixed(0)+'px');
+      c.style.setProperty('--h',(205+Math.max(0,Math.min(1,gx/window.innerWidth))*70).toFixed(0));})};
+    document.addEventListener('pointermove',function(e){gx=e.clientX;gy=e.clientY;if(!graf)graf=requestAnimationFrame(gpaint)},{passive:true});
+    window.addEventListener('scroll',function(){if(!graf)graf=requestAnimationFrame(gpaint)},{passive:true});
+  }
+
   // Parallax on the wide image (home)
   var px=$('#parallax');
   function parallax(){
