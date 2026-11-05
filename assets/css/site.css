@@ -588,3 +588,12 @@ body.menu{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.hero-cap .shiny span,.hero-cap .shiny::after{animation:none}}
 .hero-cap{padding-inline:max(16px,env(safe-area-inset-left,0px))}
 @media (max-width:560px){.hero-cap .shiny{font-size:clamp(24px,7.2vw,30px)}}
+
+/* Opportunity cards: rounded corners, thin bevel edge and two hairlines (top and bottom) */
+.opps .card{border-radius:20px;box-shadow:0 24px 46px -26px rgba(8,10,34,.6),inset 0 0 0 1px rgba(255,255,255,.1)}
+.opps .card::after{border-radius:inherit}
+.opps .card::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent) center top 24px/80% 1px no-repeat,
+             linear-gradient(90deg,transparent,rgba(255,255,255,.26),transparent) center bottom 18px/72% 1px no-repeat;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.opps .card .spot,.opps .card .spot::after{border-radius:inherit}
