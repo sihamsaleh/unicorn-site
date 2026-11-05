@@ -93,6 +93,13 @@
     window.addEventListener('scroll',function(){if(!graf)graf=requestAnimationFrame(gpaint)},{passive:true});
   }
 
+  // Hero curtain (#heroCurtain): dim and push the hero back as the next section covers it
+  var hc=document.body.classList.contains('home')?$('.hero'):null;
+  if(hc && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var hcUpd=function(){var p=Math.max(0,Math.min(1,window.scrollY/window.innerHeight));hc.style.setProperty('--hp',p.toFixed(3))};
+    window.addEventListener('scroll',hcUpd,{passive:true});hcUpd();
+  }
+
   // Parallax on the wide image (home)
   var px=$('#parallax');
   function parallax(){
