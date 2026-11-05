@@ -62,6 +62,21 @@
     if(r.bottom<0||r.top>vh)return;
     var p=(r.top+r.height/2-vh/2)/vh; px.style.transform='translateY('+(-8+p*-10)+'%)';
   }
+  // Mirror doors (home): opening follows the scroll
+  var mir=$('#mirror');
+  if(mir && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    mir.classList.add('on');
+    var mirUpd=function(){
+      var r=mir.getBoundingClientRect(),vh=window.innerHeight;
+      // 0 when the frame's top reaches 85% of the screen, 1 when it reaches 15%
+      var p=(vh*.85-r.top)/(vh*.70); p=Math.max(0,Math.min(1,p));
+      var e=1-Math.pow(1-p,2.2);
+      mir.style.setProperty('--p',e.toFixed(4));
+    };
+    window.addEventListener('scroll',mirUpd,{passive:true});
+    window.addEventListener('resize',mirUpd); mirUpd();
+  }
+
   onScroll();
 
   // Dash wave (home)

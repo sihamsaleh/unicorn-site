@@ -504,3 +504,28 @@ body.menu{overflow:hidden}
 .kpis .n{display:inline-block;font-variant-numeric:tabular-nums}
 @media (prefers-reduced-motion:reduce){.kpis.k-pre *{opacity:1!important;transform:none!important;filter:none!important;stroke-dashoffset:0!important}}
 .band .intro{padding-bottom:clamp(64px,9vw,110px)}
+
+/* Home: mirror doors that swing open as the wide image scrolls in */
+.mir{perspective:1100px;perspective-origin:50% 50%;background:var(--ink)}
+.wide .mir img{height:100%;will-change:auto}
+.mir .mir-photo{width:100%;height:100%;object-fit:cover;transform:scale(calc(1.14 - var(--p,1)*.14));transform-origin:50% 60%}
+.mir-door{position:absolute;top:0;bottom:0;width:50%;overflow:hidden;backface-visibility:hidden;will-change:transform;display:none}
+.mir.on .mir-door{display:block}
+.mir-door.l{left:0;transform-origin:0 50%;transform:rotateY(calc(var(--p,0)*-104deg))}
+.mir-door.r{right:0;transform-origin:100% 50%;transform:rotateY(calc(var(--p,0)*104deg))}
+.mir-door img{position:absolute;top:0;width:200%;max-width:none;height:100%;object-fit:cover;filter:blur(5px) saturate(.35) brightness(1.25) contrast(.85);transform:scale(1.06)}
+.mir-door.l img{left:0}
+.mir-door.r img{right:0}
+/* glass: cool silver tint, edge bevel and a light that slides across */
+.mir-door::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(115deg,rgba(255,255,255,.55),rgba(214,224,244,.32) 34%,rgba(255,255,255,.12) 52%,rgba(196,210,236,.42));box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),inset 0 0 0 10px rgba(255,255,255,.08),inset 0 0 80px rgba(20,30,70,.28)}
+.mir-door.l::after,.mir-door.r::after{content:"";position:absolute;top:0;bottom:0;width:2px;z-index:2;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.95) 20%,rgba(255,255,255,.95) 80%,transparent);box-shadow:0 0 18px rgba(255,255,255,.8)}
+.mir-door.l::after{right:0}
+.mir-door.r::after{left:0}
+.mir-door .sheen{position:absolute;inset:-20% auto -20% 0;width:38%;z-index:1;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-160%) skewX(-14deg);animation:mirSheen 3.6s 0s ease-in-out infinite}
+.mir-door.r .sheen{animation-delay:.25s}
+@keyframes mirSheen{0%{transform:translateX(-160%) skewX(-14deg)}55%,100%{transform:translateX(420%) skewX(-14deg)}}
+/* soft shade that the opening doors cast on the scene */
+.mir::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,transparent 30%,rgba(16,20,52,.55));opacity:calc(1 - var(--p,1))}
+.mir figcaption{z-index:3;opacity:calc(var(--p,1)*.85)}
+.mir-door.l{box-shadow:8px 0 30px rgba(10,14,40,.35)}.mir-door.r{box-shadow:-8px 0 30px rgba(10,14,40,.35)}
+.wide{overflow:hidden}
