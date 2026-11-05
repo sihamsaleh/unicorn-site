@@ -563,16 +563,15 @@ body.menu{overflow:hidden}
 [data-magic] .w>b{font-weight:inherit;opacity:var(--o,1);transition:opacity .25s linear}
 [data-magic] .w::before{content:attr(data-t);position:absolute;inset:0;opacity:.14;white-space:pre}
 
-/* Spotlight glow cards (opportunity cards): light and border glow follow the pointer */
-.opps .card{--x:-1000px;--y:-1000px;--h:222}
+/* Spotlight glow cards: a soft white edge that lights up only near the pointer */
+.opps .card{--x:-1000px;--y:-1000px;--o:0}
 .opps .card .k,.opps .card .body{position:relative;z-index:2}
-.opps .card .spot{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(circle at var(--x) var(--y),hsla(var(--h),100%,80%,.55) 0,hsla(var(--h),100%,68%,.28) 120px,transparent 260px)}
-.opps .card .spot::after{content:"";position:absolute;inset:0;padding:3px;
-  background:radial-gradient(circle at var(--x) var(--y),#fff 0,hsla(var(--h),100%,75%,1) 70px,hsla(var(--h),100%,65%,.5) 150px,transparent 230px);
+.opps .card .spot{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:var(--o);transition:opacity .35s ease;
+  background:radial-gradient(circle at var(--x) var(--y),rgba(255,255,255,.07) 0,transparent 220px)}
+.opps .card .spot::after{content:"";position:absolute;inset:0;padding:1.5px;
+  background:radial-gradient(circle at var(--x) var(--y),rgba(255,255,255,.95) 0,rgba(255,255,255,.45) 110px,transparent 210px);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
   mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
-.opps .card .spot::before{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
 @media (hover:none){.opps .card .spot{display:none}}
 
 /* Hero tagline: large shiny text with a light that sweeps across, and a glowing underline */

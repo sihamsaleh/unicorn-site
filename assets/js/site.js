@@ -85,8 +85,11 @@
     var gx=0,gy=0,graf=0;
     var gpaint=function(){graf=0;gcards.forEach(function(c){var r=c.getBoundingClientRect();
       c.style.setProperty('--x',(gx-r.left).toFixed(0)+'px');c.style.setProperty('--y',(gy-r.top).toFixed(0)+'px');
-      c.style.setProperty('--h',(205+Math.max(0,Math.min(1,gx/window.innerWidth))*70).toFixed(0));})};
+      // fade in only as the pointer comes within ~140px of the card
+      var dx=Math.max(r.left-gx,0,gx-r.right),dy=Math.max(r.top-gy,0,gy-r.bottom),d=Math.sqrt(dx*dx+dy*dy);
+      c.style.setProperty('--o',Math.max(0,1-d/140).toFixed(2));})};
     document.addEventListener('pointermove',function(e){gx=e.clientX;gy=e.clientY;if(!graf)graf=requestAnimationFrame(gpaint)},{passive:true});
+    document.addEventListener('pointerleave',function(){gx=gy=-9999;if(!graf)graf=requestAnimationFrame(gpaint)});
     window.addEventListener('scroll',function(){if(!graf)graf=requestAnimationFrame(gpaint)},{passive:true});
   }
 
