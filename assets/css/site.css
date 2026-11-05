@@ -484,48 +484,75 @@ body.menu{overflow:hidden}
 /* Indicators motion (JS adds .k-pre when the block starts below the screen, then .k-go) */
 .kpis-head h3{position:relative}
 .kpis.k-pre .kpis-head h3{border-inline-start-color:transparent}
-.kpis.k-pre .kpis-head h3::before{content:"";position:absolute;inset-inline-start:-4px;top:0;bottom:0;width:4px;background:var(--brand);transform:scaleY(0);transform-origin:50% 0;transition:transform .8s cubic-bezier(.65,0,.35,1)}
+.kpis.k-pre .kpis-head h3::before{content:"";position:absolute;inset-inline-start:-4px;top:0;bottom:0;width:4px;background:var(--brand);transform:scaleY(0);transform-origin:50% 0;transition:transform 1.4s cubic-bezier(.65,0,.35,1)}
 .kpis.k-go .kpis-head h3::before{transform:scaleY(1)}
-.kpis.k-pre .kpis-head>*{opacity:0;transform:translateX(-18px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
-.kpis.k-pre .kpis-head>:nth-child(2){transition-delay:.15s}
-.kpis.k-pre .kpis-head>:nth-child(3){transition-delay:.3s}
+.kpis.k-pre .kpis-head>*{opacity:0;transform:translateX(-18px);transition:opacity 1.4s ease,transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.kpis.k-pre .kpis-head>:nth-child(2){transition-delay:.3s}
+.kpis.k-pre .kpis-head>:nth-child(3){transition-delay:.6s}
 .kpis.k-go .kpis-head>*{opacity:1;transform:none}
-.kpis.k-pre li{opacity:0;transform:translateY(32px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:calc(.35s + var(--i)*.12s)}
+.kpis.k-pre li{opacity:0;transform:translateY(32px);transition:opacity 1.6s ease,transform 1.6s cubic-bezier(.2,.7,.2,1);transition-delay:calc(.7s + var(--i)*.24s)}
 .kpis.k-go li{opacity:1;transform:none}
 .kpis .ki{transition:transform .4s cubic-bezier(.2,.7,.2,1),background .3s}
-.kpis.k-pre .ki{transform:scale(.55) rotate(-12deg);transition:transform .9s cubic-bezier(.34,1.56,.64,1),background .3s;transition-delay:calc(.45s + var(--i)*.12s)}
+.kpis.k-pre .ki{transform:scale(.7) rotate(-8deg);transition:transform 1.8s cubic-bezier(.22,1.2,.36,1),box-shadow .5s;transition-delay:calc(.85s + var(--i)*.24s)}
 .kpis.k-go .ki{transform:none}
-.kpis.k-go li:hover .ki{background:rgba(33,86,179,.14);transform:translateY(-4px);transition-delay:0s}
+.kpis.k-go li:hover .ki{transform:translateY(-6px);transition-delay:0s}
 .kpis .ki svg *{stroke-dasharray:80;stroke-dashoffset:0}
-.kpis.k-pre .ki svg *{stroke-dashoffset:80;transition:stroke-dashoffset 1.4s cubic-bezier(.65,0,.35,1);transition-delay:calc(.6s + var(--i)*.12s)}
+.kpis.k-pre .ki svg *{stroke-dashoffset:80;transition:stroke-dashoffset 2.6s cubic-bezier(.65,0,.35,1);transition-delay:calc(1.1s + var(--i)*.24s)}
 .kpis.k-go .ki svg *{stroke-dashoffset:0}
-.kpis.k-pre b.t{filter:blur(8px);transition:filter 1.2s ease;transition-delay:calc(.6s + var(--i)*.12s)}
+.kpis.k-pre b.t{filter:blur(8px);transition:filter 2s ease;transition-delay:calc(1.1s + var(--i)*.24s)}
 .kpis.k-go b.t{filter:none}
 .kpis .n{display:inline-block;font-variant-numeric:tabular-nums}
 @media (prefers-reduced-motion:reduce){.kpis.k-pre *{opacity:1!important;transform:none!important;filter:none!important;stroke-dashoffset:0!important}}
 .band .intro{padding-bottom:clamp(64px,9vw,110px)}
 
-/* Home: mirror doors that swing open as the wide image scrolls in */
-.mir{perspective:1100px;perspective-origin:50% 50%;background:var(--ink)}
-.wide .mir img{height:100%;will-change:auto}
-.mir .mir-photo{width:100%;height:100%;object-fit:cover;transform:scale(calc(1.14 - var(--p,1)*.14));transform-origin:50% 60%}
-.mir-door{position:absolute;top:0;bottom:0;width:50%;overflow:hidden;backface-visibility:hidden;will-change:transform;display:none}
-.mir.on .mir-door{display:block}
-.mir-door.l{left:0;transform-origin:0 50%;transform:rotateY(calc(var(--p,0)*-104deg))}
-.mir-door.r{right:0;transform-origin:100% 50%;transform:rotateY(calc(var(--p,0)*104deg))}
-.mir-door img{position:absolute;top:0;width:200%;max-width:none;height:100%;object-fit:cover;filter:blur(5px) saturate(.35) brightness(1.25) contrast(.85);transform:scale(1.06)}
-.mir-door.l img{left:0}
-.mir-door.r img{right:0}
-/* glass: cool silver tint, edge bevel and a light that slides across */
-.mir-door::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(115deg,rgba(255,255,255,.55),rgba(214,224,244,.32) 34%,rgba(255,255,255,.12) 52%,rgba(196,210,236,.42));box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),inset 0 0 0 10px rgba(255,255,255,.08),inset 0 0 80px rgba(20,30,70,.28)}
-.mir-door.l::after,.mir-door.r::after{content:"";position:absolute;top:0;bottom:0;width:2px;z-index:2;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.95) 20%,rgba(255,255,255,.95) 80%,transparent);box-shadow:0 0 18px rgba(255,255,255,.8)}
-.mir-door.l::after{right:0}
-.mir-door.r::after{left:0}
-.mir-door .sheen{position:absolute;inset:-20% auto -20% 0;width:38%;z-index:1;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-160%) skewX(-14deg);animation:mirSheen 3.6s 0s ease-in-out infinite}
-.mir-door.r .sheen{animation-delay:.25s}
-@keyframes mirSheen{0%{transform:translateX(-160%) skewX(-14deg)}55%,100%{transform:translateX(420%) skewX(-14deg)}}
-/* soft shade that the opening doors cast on the scene */
-.mir::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,transparent 30%,rgba(16,20,52,.55));opacity:calc(1 - var(--p,1))}
-.mir figcaption{z-index:3;opacity:calc(var(--p,1)*.85)}
-.mir-door.l{box-shadow:8px 0 30px rgba(10,14,40,.35)}.mir-door.r{box-shadow:-8px 0 30px rgba(10,14,40,.35)}
+/* Home: mirror doors that swing open once the wide image is on screen */
 .wide{overflow:hidden}
+.mir{perspective:1400px;perspective-origin:50% 50%;background:#0e1233}
+.wide .mir img{height:100%;will-change:auto}
+.mir .mir-photo{width:100%;height:100%;object-fit:cover}
+.mir-door{position:absolute;top:0;bottom:0;width:50.2%;overflow:hidden;display:none;backface-visibility:hidden;
+  background:linear-gradient(160deg,#2d3f86 0%,#1b2560 38%,#121845 70%,#1f2d6e 100%)}
+.mir.on .mir-door{display:block}
+.mir-door.l{left:0;transform-origin:0 50%;box-shadow:inset -1px 0 0 rgba(255,255,255,.5)}
+.mir-door.r{right:0;transform-origin:100% 50%;box-shadow:inset 1px 0 0 rgba(255,255,255,.5)}
+/* inner frame lines */
+.mir-door::before{content:"";position:absolute;inset:clamp(12px,2.2vw,28px);border:1px solid rgba(255,255,255,.28);box-shadow:inset 0 0 0 6px rgba(255,255,255,.04);z-index:1}
+.mir-door.l::before{right:clamp(18px,2.6vw,34px)}
+.mir-door.r::before{left:clamp(18px,2.6vw,34px)}
+/* the logo spans both doors and splits down the seam */
+.mir-logo{position:absolute;top:50%;width:clamp(150px,18vw,240px);height:clamp(104px,12.5vw,167px);margin-top:calc(clamp(104px,12.5vw,167px)/-2);background:#fff;opacity:.95;z-index:2;
+  -webkit-mask:url("../img/logo-white.png") center/contain no-repeat;mask:url("../img/logo-white.png") center/contain no-repeat}
+.mir-door.l .mir-logo{right:calc(clamp(150px,18vw,240px)/-2)}
+.mir-door.r .mir-logo{left:calc(clamp(150px,18vw,240px)/-2)}
+/* light sweeping across the glass */
+.mir-door .sheen{position:absolute;top:-20%;bottom:-20%;left:0;width:30%;z-index:3;background:linear-gradient(100deg,transparent,rgba(255,255,255,.22),transparent);transform:translateX(-200%) skewX(-16deg);animation:mirSheen 4.2s .2s ease-in-out infinite}
+.mir-door.r .sheen{animation-delay:.35s}
+@keyframes mirSheen{0%{transform:translateX(-200%) skewX(-16deg)}50%,100%{transform:translateX(480%) skewX(-16deg)}}
+/* opening */
+.mir.on .mir-door{transition:transform 3.8s cubic-bezier(.65,0,.2,1) .7s,opacity 1s ease 3.6s}
+.mir.on .mir-photo{transform:scale(1.18);transition:transform 5s cubic-bezier(.2,.7,.2,1) 1s;transform-origin:50% 60%}
+.mir.on::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,transparent 25%,rgba(10,14,40,.7));transition:opacity 3.6s ease 1.4s}
+.mir.on figcaption{z-index:3;opacity:0;transform:translateY(10px);transition:opacity 1.2s ease 3.8s,transform 1.2s ease 3.8s}
+.mir.open .mir-door.l{transform:rotateY(-108deg)}
+.mir.open .mir-door.r{transform:rotateY(108deg)}
+.mir.open .mir-door{opacity:0}
+.mir.open .mir-photo{transform:none}
+.mir.open::after{opacity:0}
+.mir.open figcaption{opacity:.85;transform:none}
+
+/* Indicators: glass tiles */
+.kpis li{position:relative}
+.kpis .ki{position:relative;width:88px;height:88px;border-radius:24px;margin-bottom:16px;isolation:isolate;
+  background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(240,244,253,.42) 55%,rgba(255,255,255,.28));
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 24px 44px -20px rgba(27,52,128,.45),0 6px 14px -6px rgba(27,52,128,.18),inset 0 1px 0 #fff,inset 0 -14px 24px -10px rgba(33,86,179,.16),inset 0 0 0 1px rgba(33,86,179,.06)}
+/* coloured glow behind the glass so it reads as frosted */
+.kpis li::before{content:"";position:absolute;top:34px;left:calc(50% - 46px);width:54px;height:54px;border-radius:50%;background:radial-gradient(circle,#3d6fd6 0%,rgba(61,111,214,.55) 45%,rgba(61,111,214,0) 72%);pointer-events:none}
+.kpis .ki{z-index:1}
+.kpis .ki::after{content:"";position:absolute;z-index:-1;inset:0;border-radius:inherit;background:linear-gradient(125deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,0) 38%);opacity:.7}
+.kpis li:nth-child(2n)::before{top:-6px;left:calc(50% + 2px);background:radial-gradient(circle,#8aa6ee 0%,rgba(138,166,238,.55) 45%,rgba(138,166,238,0) 72%)}
+.kpis.k-pre li::before{opacity:0;transform:scale(.4);transition:opacity 1.6s ease,transform 2.2s cubic-bezier(.2,.7,.2,1);transition-delay:calc(1s + var(--i)*.24s)}
+.kpis.k-go li::before{opacity:1;transform:none}
+.kpis .ki svg{width:32px;height:32px;stroke:url(#kgrad);stroke-width:1.4}
+.kpis.k-go li:hover .ki{box-shadow:0 32px 50px -20px rgba(27,52,128,.55),0 8px 18px -6px rgba(27,52,128,.2),inset 0 1px 0 #fff,inset 0 -14px 24px -10px rgba(33,86,179,.2)}

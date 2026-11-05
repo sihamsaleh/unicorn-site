@@ -45,11 +45,11 @@
       if(!es[0].isIntersecting)return; ko.disconnect();
       requestAnimationFrame(function(){kp.classList.add('k-go')});
       nums.forEach(function(n,idx){
-        var to=parseFloat(n.dataset.to),dec=(n.dataset.to.split('.')[1]||'').length,dur=1800,t0=null;
+        var to=parseFloat(n.dataset.to),dec=(n.dataset.to.split('.')[1]||'').length,dur=3200,t0=null;
         setTimeout(function(){requestAnimationFrame(function step(t){
           if(!t0)t0=t; var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,4);
           n.textContent=(to*e).toFixed(dec); if(p<1)requestAnimationFrame(step); else n.textContent=n.dataset.to;
-        })},500+idx*140);
+        })},1000+idx*240);
       });
     },{threshold:.25});
     ko.observe(kp);
@@ -62,19 +62,14 @@
     if(r.bottom<0||r.top>vh)return;
     var p=(r.top+r.height/2-vh/2)/vh; px.style.transform='translateY('+(-8+p*-10)+'%)';
   }
-  // Mirror doors (home): opening follows the scroll
+  // Mirror doors (home): they swing open once the frame is well on screen
   var mir=$('#mirror');
-  if(mir && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  if(mir && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches && mir.getBoundingClientRect().top>window.innerHeight*.5){
     mir.classList.add('on');
-    var mirUpd=function(){
-      var r=mir.getBoundingClientRect(),vh=window.innerHeight;
-      // 0 when the frame's top reaches 85% of the screen, 1 when it reaches 15%
-      var p=(vh*.85-r.top)/(vh*.70); p=Math.max(0,Math.min(1,p));
-      var e=1-Math.pow(1-p,2.2);
-      mir.style.setProperty('--p',e.toFixed(4));
-    };
-    window.addEventListener('scroll',mirUpd,{passive:true});
-    window.addEventListener('resize',mirUpd); mirUpd();
+    var mo=new IntersectionObserver(function(es){
+      if(es[0].intersectionRatio<.55)return; mo.disconnect(); mir.classList.add('open');
+    },{threshold:[.55]});
+    mo.observe(mir);
   }
 
   onScroll();
