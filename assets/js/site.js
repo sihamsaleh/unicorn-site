@@ -35,6 +35,26 @@
     if(io && el.getBoundingClientRect().top>window.innerHeight){el.classList.add('pre');io.observe(el)}
   });
 
+  // Indicators: staggered entrance and numbers counting up
+  var kp=$('#kpis');
+  if(kp && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches && kp.getBoundingClientRect().top>window.innerHeight*.85){
+    var nums=$$('b .n',kp);
+    nums.forEach(function(n){n.dataset.to=n.textContent;n.textContent=(0).toFixed((n.textContent.split('.')[1]||'').length)});
+    kp.classList.add('k-pre');
+    var ko=new IntersectionObserver(function(es){
+      if(!es[0].isIntersecting)return; ko.disconnect();
+      requestAnimationFrame(function(){kp.classList.add('k-go')});
+      nums.forEach(function(n,idx){
+        var to=parseFloat(n.dataset.to),dec=(n.dataset.to.split('.')[1]||'').length,dur=1800,t0=null;
+        setTimeout(function(){requestAnimationFrame(function step(t){
+          if(!t0)t0=t; var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,4);
+          n.textContent=(to*e).toFixed(dec); if(p<1)requestAnimationFrame(step); else n.textContent=n.dataset.to;
+        })},500+idx*140);
+      });
+    },{threshold:.25});
+    ko.observe(kp);
+  }
+
   // Parallax on the wide image (home)
   var px=$('#parallax');
   function parallax(){
