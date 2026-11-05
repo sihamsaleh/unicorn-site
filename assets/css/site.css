@@ -452,3 +452,12 @@ body.menu{overflow:hidden}
 .intro-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
 .btn-line{background:transparent;color:var(--brand);border-color:var(--brand)}
 .btn-line:hover{background:var(--brand);color:#fff}
+
+/* Home: Madinah section */
+.madinah{background:#fff;border-top:1px solid var(--line)}
+.madinah .h2{border-inline-start:2px solid var(--brand);padding-inline-start:clamp(18px,2vw,28px)}
+.madinah .prose{display:flex;flex-direction:column;gap:16px}
+.madinah .prose p{max-width:none}
+.madinah .prose p+p{margin-top:0}
+.madinah .btn{margin-top:14px}
+@media (max-width:760px){.madinah .split{grid-template-columns:1fr}}
