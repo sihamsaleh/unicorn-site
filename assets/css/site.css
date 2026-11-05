@@ -74,7 +74,7 @@ body.menu .burger span:nth-child(2){top:21px;transform:rotate(-45deg)}
 .hero-mobile-title .sep{width:1.5px;align-self:stretch;background:linear-gradient(to bottom,rgba(255,255,255,0),#fff 18%,#fff 82%,rgba(255,255,255,0));transform-origin:50% 0;animation:sepIn 1s .35s cubic-bezier(.65,0,.35,1) both}
 /* Motion: the divider draws down first, then the logo emerges from behind it, sliding away from the line */
 @keyframes sepIn{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-@keyframes logoIn{from{opacity:0;transform:translateX(36px);clip-path:inset(0 0 0 100%);filter:blur(6px)}60%{filter:blur(0)}to{opacity:1;transform:none;clip-path:inset(0 0 0 0);filter:none}}
+@keyframes logoIn{from{opacity:0;transform:translateX(24px);filter:blur(6px)}60%{filter:blur(0)}to{opacity:1;transform:none;filter:none}}
 .scroll-cue{display:block;width:1px;height:46px;margin:18px auto 0;background:linear-gradient(#fff,transparent);animation:cue 2.2s infinite}
 @keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
