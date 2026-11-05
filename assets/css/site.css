@@ -663,3 +663,9 @@ body.menu{overflow:hidden}
   .home .cta .wrap{padding-inline:20px}
 }
 .home .madinah .split,.home .madinah .kpis{width:calc(100% - 2*var(--gutter));max-width:calc(var(--max) - 2*var(--gutter))}
+
+/* Scroll word reveal (Madinah paragraphs) */
+[data-magic].mg p{color:var(--ink)}
+[data-magic] .w{position:relative;display:inline-block;white-space:pre}
+[data-magic] .w>b{font-weight:inherit;opacity:var(--o,1);transition:opacity .25s linear}
+[data-magic] .w::before{content:attr(data-t);position:absolute;inset:0;opacity:.14;white-space:pre}
