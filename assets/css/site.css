@@ -447,3 +447,8 @@ body.menu{overflow:hidden}
   .facts div:nth-child(3){grid-column:1/-1;border-inline-start:0;padding-inline-start:0;border-top:1px solid var(--line)}
   .bar-row{grid-template-columns:90px 1fr 84px;gap:10px;font-size:13px}
 }
+
+/* Home intro buttons */
+.intro-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.btn-line{background:transparent;color:var(--brand);border-color:var(--brand)}
+.btn-line:hover{background:var(--brand);color:#fff}
