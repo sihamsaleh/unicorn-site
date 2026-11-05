@@ -574,3 +574,18 @@ body.menu{overflow:hidden}
   mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
 .opps .card .spot::before{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
 @media (hover:none){.opps .card .spot{display:none}}
+
+/* Hero tagline: large shiny text with a light that sweeps across, and a glowing underline */
+.hero-cap .shiny{font-family:var(--head);font-size:clamp(28px,4.6vw,64px);line-height:1.5;letter-spacing:0;opacity:1;margin:0;
+  display:inline-flex;flex-direction:column;align-items:center;gap:clamp(10px,1.4vw,18px);text-shadow:none;animation:shinyIn 1.6s 1.4s cubic-bezier(.2,.7,.2,1) both}
+.hero-cap .shiny span{background:linear-gradient(100deg,#e9e6ff 0%,#ffffff 20%,#f6d7b0 32%,#ffffff 44%,#c9d6ff 60%,#ffffff 80%,#e9e6ff 100%);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 4px 22px rgba(20,22,60,.45));animation:shinyMove 6s linear infinite;padding-inline:.1em}
+.hero-cap .shiny::after{content:"";width:min(70%,420px);height:2px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),#f6d7b0,rgba(255,255,255,.9),transparent);background-size:200% 100%;
+  animation:shinyMove 4s linear infinite;box-shadow:0 0 14px rgba(255,236,210,.7)}
+@keyframes shinyMove{from{background-position:250% 0}to{background-position:0 0}}
+@keyframes shinyIn{from{opacity:0;transform:translateY(22px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@media (prefers-reduced-motion:reduce){.hero-cap .shiny span,.hero-cap .shiny::after{animation:none}}
+.hero-cap{padding-inline:max(16px,env(safe-area-inset-left,0px))}
+@media (max-width:560px){.hero-cap .shiny{font-size:clamp(24px,7.2vw,30px)}}
