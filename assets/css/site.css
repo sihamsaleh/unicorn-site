@@ -560,7 +560,7 @@ body.menu{overflow:hidden}
 /* Scroll word reveal (Madinah paragraphs) */
 [data-magic].mg p{color:var(--ink)}
 [data-magic] .w{position:relative;display:inline-block}
-[data-magic] .w>b{font-weight:inherit;opacity:var(--o,1);transition:opacity .25s linear}
+[data-magic] .w>b{font-weight:inherit;opacity:var(--o,1);transition:opacity .55s ease}
 [data-magic] .w::before{content:attr(data-t);position:absolute;inset:0;opacity:.14;white-space:nowrap}
 
 /* Spotlight glow cards: a soft white edge that lights up only near the pointer */
@@ -681,3 +681,30 @@ body.menu{overflow:hidden}
 .bwf-foot{position:absolute;left:0;right:0;bottom:0;height:34%;z-index:2;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(var(--bwf-bg-rgb),.55) 55%,var(--bwf-bg))}
 @container (max-width:760px){.bwf-inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:40px}.bwf-col:nth-child(1){grid-column:1 / -1;max-width:none}}
 @media (prefers-reduced-motion:reduce){.bwf .bwf-lw,.bwf .bwf-fade,.bwf .bwf-label::after,.bwf .bwf-l,.bwf .bwf-soc,.bwf .bwf-link-t,.bwf .bwf-link svg{transition:none!important;animation:none!important}.bwf[data-in="false"] .bwf-lw,.bwf[data-in="false"] .bwf-fade{translate:none;opacity:1}.bwf[data-in="false"] .bwf-label::after{--bwf-line:1}}
+
+/* Opportunity cards as an expanding gallery: one wide card, the others tall slim strips */
+.opps{display:flex!important;grid-template-columns:none!important;gap:clamp(12px,1.4vw,20px);height:clamp(460px,44vw,620px);align-items:stretch}
+.opps .card{flex:1 1 0;min-width:0;height:auto!important;aspect-ratio:auto!important;border-radius:clamp(22px,2.4vw,34px);cursor:pointer;
+  transition:flex-grow .9s cubic-bezier(.65,0,.2,1),box-shadow .6s,opacity .9s,transform .9s}
+.opps .card.on{flex-grow:4.2;box-shadow:0 30px 60px -30px rgba(8,10,34,.7),inset 0 0 0 1px rgba(255,255,255,.35)}
+.opps .card img{transition:transform 1.4s cubic-bezier(.2,.7,.2,1),filter .9s}
+.opps .card:not(.on) img{filter:saturate(.7) brightness(.85)}
+.opps .card:not(.on)::after{background:linear-gradient(to bottom,rgba(14,18,51,.55),rgba(14,18,51,.15) 30%,rgba(14,18,51,.25) 70%,rgba(14,18,51,.75))}
+.opps .card.on::after{background:linear-gradient(to bottom,rgba(14,18,51,.05),rgba(14,18,51,.05) 35%,rgba(14,18,51,.55) 62%,rgba(10,13,40,.92))}
+.opps .card .body{text-align:start;align-items:flex-start;padding:clamp(24px,3vw,48px);width:100%;box-sizing:border-box}
+.opps .card .body>*{transition:opacity .5s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.opps .card:not(.on) .body>*{opacity:0;transform:translateY(14px);pointer-events:none;transition-delay:0s}
+.opps .card.on .body>*{opacity:1;transform:none;transition-delay:.45s}
+.opps .card.on .body>*:nth-child(2){transition-delay:.55s}
+.opps .card.on .body>*:nth-child(3){transition-delay:.65s}
+.opps .card .body h3{font-size:clamp(24px,2.6vw,38px);line-height:1.45;min-width:min(420px,60vw)}
+.opps .card .body p{max-height:none!important;opacity:1;font-size:clamp(15px,1.2vw,17px);line-height:1.9;color:rgba(255,255,255,.85);max-width:520px;margin-top:10px}
+.opps .card .more{display:inline-flex;align-items:center;gap:10px;margin-top:18px;border-bottom:0;color:#9fc0ff;font-family:var(--head);font-size:16px}
+.opps .card .more::after{content:"←";transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.opps .card:hover .more::after{transform:translateX(-6px)}
+@media (max-width:760px){
+  .opps{flex-direction:column;height:auto}
+  .opps .card{flex:none;height:96px!important;transition:height .8s cubic-bezier(.65,0,.2,1),box-shadow .6s}
+  .opps .card.on{height:440px!important}
+  .opps .card .body h3{min-width:0}
+}

@@ -58,10 +58,10 @@
   // Magic text: on every page, body text (not headings) lights up word by word as it scrolls in
   (function(){
     if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    var skip='.hero,.phero,form,[hidden],.form-done,.src';
+    var skip='.hero,.phero,form,[hidden],.form-done,.src,.kpis-head,.sec-title,hgroup,header';
     var items=[];
     $$('main p, main blockquote').forEach(function(p){
-      if(p.children.length||p.closest(skip)||!p.textContent.trim())return;
+      if(p.children.length||p.closest(skip)||!p.textContent.trim()||/GE SS Two/i.test(getComputedStyle(p).fontFamily)||!/[\u0600-\u06FF]/.test(p.textContent))return;
       var parts=p.textContent.trim().split(/\s+/),words=[];
       p.textContent='';
       parts.forEach(function(t,i){
@@ -73,20 +73,21 @@
       items.push({el:p,words:words});
     });
     if(!items.length)return;
-    var raf=0;
-    var upd=function(){
-      raf=0;
-      var vh=window.innerHeight,end=window.scrollY+vh>=document.documentElement.scrollHeight-4;
-      items.forEach(function(it){
-        var r=it.el.getBoundingClientRect(),n=it.words.length;
-        // 0 when the text's top is at 92% of the screen, 1 when it reaches 45%
-        var p=(end||(!r.width&&!r.height))?1:(vh*.92-r.top)/(vh*.47); p=Math.max(0,Math.min(1,p));
-        if(it.p===p)return; it.p=p;
-        for(var i=0;i<n;i++){var o=(p-i/n)*n;it.words[i].style.setProperty('--o',Math.max(0,Math.min(1,o)).toFixed(3))}
-      });
+    // Plays by itself once the text is on screen: line after line, each line sweeping across its words
+    var LINE=850,queue=0;
+    items.forEach(function(it){it.words.forEach(function(w){w.style.setProperty('--o','0')})});
+    var play=function(it){
+      var lines=[],lastTop=null;
+      it.words.forEach(function(w){var t=Math.round(w.parentNode.offsetTop);if(lastTop===null||Math.abs(t-lastTop)>4){lines.push([]);lastTop=t}lines[lines.length-1].push(w)});
+      var now=performance.now(),start=Math.max(0,queue-now);
+      lines.forEach(function(ln,li){ln.forEach(function(w,wi){
+        w.style.transitionDelay=(start+li*LINE+wi/ln.length*LINE*.85).toFixed(0)+'ms';w.style.setProperty('--o','1')})});
+      queue=now+start+lines.length*LINE*.9;
     };
-    var req=function(){if(!raf)raf=requestAnimationFrame(upd)};
-    window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);upd();
+    if(!('IntersectionObserver' in window)){items.forEach(play);return}
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);
+      var it=items.filter(function(x){return x.el===e.target})[0];if(it)play(it)})},{threshold:.35,rootMargin:'0px 0px -8% 0px'});
+    items.forEach(function(it){io.observe(it.el)});
   })();
 
   // Beam wordmark footer: fit UNICORN to the width, a slow shaft of light that leans toward the pointer
@@ -137,6 +138,17 @@
     letters.forEach(function(l){
       l.addEventListener('click',function(){if(reduced)return;l.classList.remove('is-hop');void l.offsetWidth;l.classList.add('is-hop')});
       l.addEventListener('animationend',function(){l.classList.remove('is-hop')});
+    });
+  })();
+
+  // opps-expand: hovering, focusing or tapping a slim card opens it
+  (function(){
+    var cs=$$('.opps .card'); if(!cs.length)return;
+    var open=function(c){cs.forEach(function(x){x.classList.toggle('on',x===c)})};
+    cs.forEach(function(c){
+      c.addEventListener('mouseenter',function(){if(matchMedia('(hover:hover)').matches)open(c)});
+      c.addEventListener('focus',function(){open(c)});
+      c.addEventListener('click',function(e){if(!c.classList.contains('on')){e.preventDefault();open(c)}});
     });
   })();
 
