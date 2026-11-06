@@ -559,9 +559,9 @@ body.menu{overflow:hidden}
 
 /* Scroll word reveal (Madinah paragraphs) */
 [data-magic].mg p{color:var(--ink)}
-[data-magic] .w{position:relative;display:inline-block;white-space:pre}
+[data-magic] .w{position:relative;display:inline-block}
 [data-magic] .w>b{font-weight:inherit;opacity:var(--o,1);transition:opacity .25s linear}
-[data-magic] .w::before{content:attr(data-t);position:absolute;inset:0;opacity:.14;white-space:pre}
+[data-magic] .w::before{content:attr(data-t);position:absolute;inset:0;opacity:.14;white-space:nowrap}
 
 /* Spotlight glow cards: a soft white edge that lights up only near the pointer */
 .opps .card{--x:-1000px;--y:-1000px;--o:0}

@@ -55,28 +55,39 @@
     ko.observe(kp);
   }
 
-  // Magic text: words light up one by one as the block scrolls through the screen
-  $$('[data-magic]').forEach(function(box){
+  // Magic text: on every page, body text (not headings) lights up word by word as it scrolls in
+  (function(){
     if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    var words=[];
-    $$('p',box).forEach(function(p){
-      var parts=p.textContent.trim().split(/\s+/);
+    var skip='.hero,.phero,form,[hidden],.form-done,.src';
+    var items=[];
+    $$('main p, main blockquote').forEach(function(p){
+      if(p.children.length||p.closest(skip)||!p.textContent.trim())return;
+      var parts=p.textContent.trim().split(/\s+/),words=[];
       p.textContent='';
       parts.forEach(function(t,i){
-        var w=document.createElement('span');w.className='w';w.setAttribute('data-t',t+(i<parts.length-1?' ':''));
-        var b=document.createElement('b');b.textContent=t+(i<parts.length-1?' ':'');w.appendChild(b);p.appendChild(w);words.push(b);
+        if(i)p.appendChild(document.createTextNode(' '));
+        var w=document.createElement('span');w.className='w';w.setAttribute('data-t',t);
+        var bb=document.createElement('b');bb.textContent=t;w.appendChild(bb);p.appendChild(w);words.push(bb);
       });
+      p.setAttribute('data-magic','');
+      items.push({el:p,words:words});
     });
-    box.classList.add('mg');
-    var n=words.length;
+    if(!items.length)return;
+    var raf=0;
     var upd=function(){
-      var r=box.getBoundingClientRect(),vh=window.innerHeight;
-      // 0 when the block's top is at 90% of the screen, 1 when it reaches 25%
-      var p=(vh*.9-r.top)/(vh*.65); p=Math.max(0,Math.min(1,p));
-      for(var i=0;i<n;i++){var a=i/n,b=(i+1)/n,o=(p-a)/(b-a);words[i].style.setProperty('--o',Math.max(0,Math.min(1,o)).toFixed(3))}
+      raf=0;
+      var vh=window.innerHeight,end=window.scrollY+vh>=document.documentElement.scrollHeight-4;
+      items.forEach(function(it){
+        var r=it.el.getBoundingClientRect(),n=it.words.length;
+        // 0 when the text's top is at 92% of the screen, 1 when it reaches 45%
+        var p=(end||(!r.width&&!r.height))?1:(vh*.92-r.top)/(vh*.47); p=Math.max(0,Math.min(1,p));
+        if(it.p===p)return; it.p=p;
+        for(var i=0;i<n;i++){var o=(p-i/n)*n;it.words[i].style.setProperty('--o',Math.max(0,Math.min(1,o)).toFixed(3))}
+      });
     };
-    window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
-  });
+    var req=function(){if(!raf)raf=requestAnimationFrame(upd)};
+    window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);upd();
+  })();
 
   // Spotlight glow on the opportunity cards: follows the pointer across all three
   var gcards=$$('.opps .card');
