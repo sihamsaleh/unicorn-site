@@ -606,3 +606,11 @@ body.menu{overflow:hidden}
 /* sections without their own background get the page colour so the hero never shows through */
 :where(.home main>section:not(.hero),.home main>div){background-color:var(--paper)}
 .home .cta{margin-top:0;border-top:clamp(72px,10vw,130px) solid var(--paper)}
+
+/* Madinah: centred text, short rule under the heading, rounded button */
+.madinah .split{justify-items:center;text-align:center}
+.madinah .split>*{margin-inline:auto}
+.madinah .h2{border-inline-start:0;padding-inline-start:0}
+.madinah .h2::after{content:"";display:block;width:56px;height:2px;margin:18px auto 0;background:var(--brand)}
+.madinah .prose{align-items:center}
+.madinah .btn-ink{align-self:center;border-radius:12px}
