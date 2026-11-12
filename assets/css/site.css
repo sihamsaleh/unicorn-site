@@ -1,4 +1,4 @@
-@font-face{font-family:"GE SS Two";src:url("../fonts/ge-ss-two-bold.otf") format("opentype");font-weight:700;font-display:swap}
+@font-face{font-family:"Thmanyah Sans";src:url("../fonts/thmanyah-sans-regular.otf") format("opentype");font-weight:400;font-display:swap}@font-face{font-family:"Thmanyah Sans";src:url("../fonts/thmanyah-sans-bold.otf") format("opentype");font-weight:700;font-display:swap}@font-face{font-family:"Thmanyah Serif Display";src:url("../fonts/thmanyah-serif-display-black.otf") format("opentype");font-weight:900;font-display:swap}@font-face{font-family:"GE SS Two";src:url("../fonts/ge-ss-two-bold.otf") format("opentype");font-weight:700;font-display:swap}
 @font-face{font-family:"Swissra";src:url("../fonts/swissra-medium.otf") format("opentype");font-weight:500;font-display:swap}
 @font-face{font-family:"Futura";src:url("../fonts/futura-medium.ttf") format("truetype");font-weight:500;font-display:swap}
 
@@ -13,9 +13,9 @@
   --glow:#f0c48a;
   --paper:#f7f5f9;
   --line:rgba(26,29,58,.14);
-  --head:"GE SS Two","Futura",system-ui,sans-serif;
-  --body:"Swissra","Futura",system-ui,sans-serif;
-  --latin:"Futura","Swissra",system-ui,sans-serif;
+  --head:"Thmanyah Sans",system-ui,sans-serif;--display:"Thmanyah Serif Display","Thmanyah Sans",serif;
+  --body:"Thmanyah Sans",system-ui,sans-serif;
+  --latin:"Thmanyah Sans",system-ui,sans-serif;
   --gutter:clamp(16px,4vw,56px);
   --max:1320px;
 }
@@ -708,3 +708,19 @@ body.menu{overflow:hidden}
   .opps .card.on{height:440px!important}
   .opps .card .body h3{min-width:0}
 }
+
+/* Thmanyah type (like alnibras-site): headings in Thmanyah Serif Display Black, everything else in Thmanyah Sans */
+h1,h2,h3,.h2,.sec-title,.hero-cap .shiny,.intro h1,.kpis-head h3,.strip h2,.cta h2,.phero h1,.card h3,.svc-item h3,.map-card h3{font-family:var(--display);font-weight:900;letter-spacing:0}
+.btn,.nav a,.more,.period,.eyebrow{font-weight:700}
+
+/* Open card: only the title shows, low in the card; on hover it rises and the text and link appear under it */
+@media (hover:hover){
+  .opps .card.on .body{transform:translateY(0);transition:transform .7s cubic-bezier(.16,1,.3,1)}
+  .opps .card.on .body p,.opps .card.on .body .more{max-height:0!important;opacity:0!important;margin-top:0!important;overflow:hidden;
+    transition:max-height .7s cubic-bezier(.16,1,.3,1),opacity .45s ease,margin .7s cubic-bezier(.16,1,.3,1)!important;transition-delay:0s!important}
+  .opps .card.on:hover .body p{max-height:140px!important;opacity:1!important;margin-top:10px!important;transition-delay:.08s!important}
+  .opps .card.on:hover .body .more{max-height:40px!important;opacity:1!important;margin-top:16px!important;transition-delay:.16s!important}
+}
+
+/* hero tagline: no underline */
+.hero-cap .shiny::after{display:none}

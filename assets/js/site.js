@@ -58,7 +58,7 @@
   // Magic text: on every page, body text (not headings) lights up word by word as it scrolls in
   (function(){
     if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    var skip='.hero,.phero,form,[hidden],.form-done,.src,.kpis-head,.sec-title,hgroup,header';
+    var skip='.hero,.phero,form,[hidden],.form-done,.src,.kpis-head,.sec-title,hgroup,header,.opps';
     var items=[];
     $$('main p, main blockquote').forEach(function(p){
       if(p.children.length||p.closest(skip)||!p.textContent.trim()||/GE SS Two/i.test(getComputedStyle(p).fontFamily)||!/[\u0600-\u06FF]/.test(p.textContent))return;
@@ -170,7 +170,9 @@
   // Hero curtain (#heroCurtain): dim and push the hero back as the next section covers it
   var hc=document.body.classList.contains('home')?$('.hero'):null;
   if(hc && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-    var hcUpd=function(){var p=Math.max(0,Math.min(1,window.scrollY/window.innerHeight));hc.style.setProperty('--hp',p.toFixed(3))};
+    // once the hero is fully covered it is hidden, so Chrome can never paint it through the sections below
+    var hcUpd=function(){var p=Math.max(0,Math.min(1,window.scrollY/window.innerHeight));hc.style.setProperty('--hp',p.toFixed(3));
+      hc.style.visibility=window.scrollY>hc.offsetHeight+2?'hidden':''};
     window.addEventListener('scroll',hcUpd,{passive:true});hcUpd();
   }
 
