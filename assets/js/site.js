@@ -58,7 +58,7 @@
   // Magic text: on every page, body text (not headings) lights up word by word as it scrolls in
   (function(){
     if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    var skip='.hero,.phero,form,[hidden],.form-done,.src,.kpis-head,.sec-title,hgroup,header,.opps';
+    var skip='.hero,.phero,form,[hidden],.form-done,.src,.kpis-head,.sec-title,hgroup,header,.opps,.arcx';
     var items=[];
     $$('main p, main blockquote').forEach(function(p){
       if(p.children.length||p.closest(skip)||!p.textContent.trim()||/GE SS Two/i.test(getComputedStyle(p).fontFamily)||!/[\u0600-\u06FF]/.test(p.textContent))return;
@@ -166,6 +166,78 @@
     document.addEventListener('pointerleave',function(){gx=gy=-9999;if(!graf)graf=requestAnimationFrame(gpaint)});
     window.addEventListener('scroll',function(){if(!graf)graf=requestAnimationFrame(gpaint)},{passive:true});
   }
+
+  // Arc carousel («فرصة لا تتكرّر»): cards on a wheel, swung by a chained spring
+  (function(){
+    var root=$('[data-arc]'); if(!root)return;
+    var cards=$$('.arcx-card',root),n=cards.length,label=$('.arcx-label',root);
+    var num=$('.arcx-num',root),title=$('.arcx-title',root),text=$('.arcx-text',root),more=$('.arcx-more',root);
+    var prev=$('.arcx-btn.prev',root),next=$('.arcx-btn.next',root);
+    var GAP=18,K=.2,DAMP=.4,DIR=-1; // DIR -1: right to left, the first card sits on the right
+    var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var st={active:Math.min(1,n-1),cards:cards.map(function(){return{a:0,v:0}}),intro:true,fan:false,shown:-1,raf:0,busy:false};
+    var target=function(i){return DIR*(i-st.active)*GAP};
+    var show=function(i){
+      if(i===st.shown)return; st.shown=i; var c=cards[i];
+      cards.forEach(function(x,k){x.classList.toggle('is-on',k===i)});
+      label.classList.add('swap');
+      setTimeout(function(){num.textContent=(i<9?'0':'')+(i+1);title.textContent=c.dataset.title;text.textContent=c.dataset.text;more.href=c.getAttribute('href');label.classList.remove('swap')},180);
+      prev.disabled=st.active<=0;next.disabled=st.active>=n-1;
+    };
+    var paint=function(){
+      var best=0,min=1e9;
+      st.cards.forEach(function(c,i){
+        cards[i].style.transform='rotate('+c.a.toFixed(3)+'deg) translateY(calc(var(--R) * -1))';
+        if(Math.abs(c.a)<min){min=Math.abs(c.a);best=i}
+      });
+      cards.forEach(function(el,i){el.style.zIndex=String(n-Math.abs(i-best))});
+      return best;
+    };
+    var last=0;
+    var step=function(now){
+      // integrate in fixed 60 fps ticks, so the spring keeps its speed on 120 Hz screens and slow frames
+      var ticks=last?Math.min(12,Math.max(1,Math.round((now-last)/16.67))):1;last=now;
+      var settled=true;
+      for(var tk=0;tk<ticks;tk++){settled=true;
+      if(st.intro){
+        if(st.fan){
+          st.cards.forEach(function(c,i){var t=target(i);c.v=(c.v+(t-c.a)*.01)*.88;c.a+=c.v;if(Math.abs(t-c.a)>.3||Math.abs(c.v)>.3)settled=false});
+          if(settled)st.intro=false;
+        } else settled=false;
+      } else {
+        var L=n-1,lead=st.cards[L],lt=target(L);
+        lead.v=(lead.v+(lt-lead.a)*K)*DAMP;lead.a+=lead.v;
+        for(var i=L-1;i>=0;i--){var c=st.cards[i],t=st.cards[i+1].a-DIR*GAP;c.v=(c.v+(t-c.a)*K)*DAMP;c.a+=c.v;
+          if(Math.abs(c.v)>.02||Math.abs(target(i)-c.a)>.05)settled=false}
+        if(Math.abs(lead.v)>.02||Math.abs(lt-lead.a)>.05)settled=false;
+      }
+      }
+      var best=paint(); if(!st.intro)show(best);
+      st.raf=settled?0:requestAnimationFrame(step);if(settled)last=0;
+    };
+    var kick=function(){if(!st.raf)st.raf=requestAnimationFrame(step)};
+    var go=function(i){i=Math.max(0,Math.min(n-1,i));if(i===st.active)return;st.active=i;kick()};
+    if(reduced){st.cards.forEach(function(c,i){c.a=target(i)});st.intro=false;paint();show(st.active);root.classList.add('in-view');}
+    else{
+      paint();show(st.active);
+      // start the entrance once the wheel's stage is on screen
+      var started=false,stg=$('.arcx-stage',root);
+      var check=function(){if(started)return;var r=stg.getBoundingClientRect();if(r.top<window.innerHeight*.9&&r.bottom>0){started=true;
+        window.removeEventListener('scroll',check);root.classList.add('in-view');setTimeout(function(){st.fan=true;kick()},700)}};
+      window.addEventListener('scroll',check,{passive:true});check();
+    }
+    prev.addEventListener('click',function(){go(st.active-1)});
+    next.addEventListener('click',function(){go(st.active+1)});
+    cards.forEach(function(c,i){c.addEventListener('click',function(e){if(i!==st.active){e.preventDefault();go(i)}})});
+    root.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'){go(st.active+1);e.preventDefault()}else if(e.key==='ArrowRight'){go(st.active-1);e.preventDefault()}});
+    // swipe and horizontal wheel only: the page keeps scrolling normally
+    var sx=null;
+    var stage=$('.arcx-stage',root);
+    stage.addEventListener('pointerdown',function(e){sx=e.clientX});
+    stage.addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx;sx=null;if(Math.abs(dx)>40)go(st.active+(dx>0?1:-1))});
+    stage.addEventListener('wheel',function(e){if(Math.abs(e.deltaX)<Math.abs(e.deltaY)||Math.abs(e.deltaX)<15||st.busy)return;
+      e.preventDefault();st.busy=true;setTimeout(function(){st.busy=false},450);go(st.active+(e.deltaX<0?1:-1))},{passive:false});
+  })();
 
   // Hero curtain (#heroCurtain): dim and push the hero back as the next section covers it
   var hc=document.body.classList.contains('home')?$('.hero'):null;
