@@ -724,3 +724,35 @@ h1,h2,h3,.h2,.sec-title,.hero-cap .shiny,.intro h1,.kpis-head h3,.strip h2,.cta 
 
 /* hero tagline: no underline */
 .hero-cap .shiny::after{display:none}
+
+/* Madinah: photograph on the right, the words beside it on the left */
+.madinah .split.mz{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center;justify-items:stretch;text-align:start}
+.madinah .split.mz>*{max-width:none;margin-inline:0}
+.mz-img{margin:0;border-radius:28px;overflow:hidden;aspect-ratio:4/4.6;box-shadow:0 34px 70px -40px rgba(14,18,51,.55)}
+.mz-img img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;transition:transform 1.4s cubic-bezier(.16,1,.3,1)}
+.mz-img:hover img{transform:scale(1.03)}
+.mz-text{display:flex;flex-direction:column;gap:clamp(18px,2.4vw,28px);align-items:flex-start}
+.mz .h2::after{margin:18px 0 0}
+.mz .prose{align-items:flex-start}
+.mz .btn-ink{align-self:flex-start}
+@media (max-width:860px){.madinah .split.mz{grid-template-columns:1fr}.mz-img{aspect-ratio:4/3}}
+
+/* Madinah: the photograph fills the whole right half, edge to edge, from the top of the section; the words sit in the left half */
+.madinah.block{padding-top:0}
+.mz-row{position:relative}
+.mz-bleed{position:absolute;top:0;bottom:0;right:0;width:50%;margin:0;overflow:hidden}
+.mz-bleed img{width:100%;height:100%;object-fit:cover;object-position:45% 50%;transition:transform 1.6s cubic-bezier(.16,1,.3,1)}
+.mz-row:hover .mz-bleed img{transform:scale(1.03)}
+.madinah .split.mz{grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:clamp(560px,72vh,760px);padding-block:clamp(64px,8vw,110px)}
+.madinah .split.mz .mz-text{grid-column:2}
+@media (max-width:860px){
+  .mz-bleed{position:relative;width:100%;height:auto;aspect-ratio:4/3}
+  .madinah .split.mz{grid-template-columns:1fr;min-height:0;padding-block:clamp(36px,8vw,56px) 0}
+  .madinah .split.mz .mz-text{grid-column:1}
+}
+@media (max-width:860px){.mz-bleed{aspect-ratio:1/1}}
+.mz-bleed img{object-position:55% 60%}
+/* card link arrow: never clipped, drawn in a font that has the glyph */
+.opps .card .more{overflow:visible!important;line-height:1.6}
+.opps .card .more::after{font-family:system-ui,-apple-system,sans-serif;display:inline-block}
+.mz-bleed img{object-position:45% 50%}
