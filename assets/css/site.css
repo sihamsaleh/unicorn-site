@@ -924,3 +924,4 @@ h1,h2,h3,.h2,.sec-title,.hero-cap .shiny,.intro h1,.kpis-head h3,.strip h2,.cta 
 .pill:hover .ps{color:#4a4f70}
 .pill:hover .pi{background:linear-gradient(180deg,#fff,#e4ebfb);color:var(--brand)}
 .pill:hover .pc{background:radial-gradient(circle at 35% 30%,#7fa6ff,#1c3f94 70%);color:#fff}
+.pills{margin-bottom:0}
