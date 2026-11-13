@@ -287,6 +287,14 @@
     } else {s.vis=true}
   })();
 
+  // «خدماتنا» flip cards: on touch screens the first tap flips the card, the second follows the link
+  $$('.flipc').forEach(function(c){
+    c.addEventListener('click',function(e){
+      if(matchMedia('(hover:hover)').matches)return;
+      if(!c.classList.contains('on')){e.preventDefault();$$('.flipc.on').forEach(function(x){x.classList.remove('on')});c.classList.add('on')}
+    });
+  });
+
   // Hero curtain (#heroCurtain): dim and push the hero back as the next section covers it
   var hc=document.body.classList.contains('home')?$('.hero'):null;
   if(hc && !matchMedia('(prefers-reduced-motion: reduce)').matches){
