@@ -832,3 +832,61 @@ h1,h2,h3,.h2,.sec-title,.hero-cap .shiny,.intro h1,.kpis-head h3,.strip h2,.cta 
 .hdr.solid .btn-light,.hdr.solid .btn-light:hover{background:rgba(255,255,255,.82);color:var(--brand);border-color:rgba(33,86,179,.28)!important}
 .hdr.solid .btn-light:hover{background:#fff}
 .hdr.solid .btn-light::before{background:conic-gradient(from var(--bshine),transparent 0 62%,rgba(33,86,179,0) 64%,rgba(33,86,179,.9) 74%,#7fa6ff 79%,rgba(33,86,179,0) 88%,transparent 100%)}
+
+/* section divider: one soft wave */
+.wave-div{height:60px;margin-block:clamp(10px,2vw,24px);background:var(--paper)}
+.wave-div svg{width:100%;height:100%;display:block}
+.home main>.wave-div{background:transparent;z-index:0}
+.home #find{padding-top:clamp(16px,2.4vw,32px)}
+
+/* «اكتشف…» style buttons (btn-ink): white inside, gradient border from light blue to navy */
+.btn-ink:not(.opp-mini.alt .btn-ink),.madinah .btn-ink{
+  color:var(--ink);border:2px solid transparent!important;border-radius:999px!important;
+  background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#7fa6ff,#2156b3,#1a1d3a) border-box;
+  -webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 10px 24px -16px rgba(14,18,51,.35)}
+.btn-ink:not(.opp-mini.alt .btn-ink):hover,.madinah .btn-ink:hover{color:var(--ink);transform:translateY(-1px);
+  background:linear-gradient(#f3f6fe,#f3f6fe) padding-box,linear-gradient(135deg,#7fa6ff,#2156b3,#1a1d3a) border-box}
+.btn-ink:not(.opp-mini.alt .btn-ink)::before,.btn-ink:not(.opp-mini.alt .btn-ink)::after,.madinah .btn-ink::before,.madinah .btn-ink::after{display:none}
+/* neighbouring buttons: the running light is half a turn apart */
+.btn + .btn::before{animation-delay:-1.6s}
+/* indicator values in the heading face */
+#kpis li>b,#kpis li>b .n{font-family:var(--display);font-weight:900;letter-spacing:0}
+/* more air around the wave */
+.home main>.wave-div{margin-block:clamp(40px,5vw,80px)}
+.home #find{padding-top:clamp(40px,5vw,80px)}
+.home main>.wave-div{margin-top:clamp(80px,10vw,144px)}
+
+/* =====================================================================
+   Photo / map comparator: the aerial photograph on top, a live Google map
+   underneath, and a divider that follows the pointer on a spring
+   ===================================================================== */
+.cmp-sec{padding-block:clamp(40px,6vw,90px)}
+.cmp{position:relative;aspect-ratio:16/8;min-height:380px;width:100%;overflow:hidden;border-radius:30px;background:#dfe5ee;
+  box-shadow:0 40px 80px -44px rgba(14,18,51,.55),0 0 0 1px rgba(26,29,58,.08);user-select:none;-webkit-user-select:none;touch-action:pan-y}
+.cmp-map{position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(.9)}
+.cmp.dragging .cmp-map{pointer-events:none}
+.cmp-top{position:absolute;inset:0;clip-path:inset(0 30% 0 0);will-change:clip-path;cursor:ew-resize}
+.cmp-top img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;pointer-events:none}
+.cmp-top::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,13,40,.82),rgba(10,13,40,0) 46%);pointer-events:none}
+.cmp-cap{position:absolute;z-index:1;bottom:clamp(20px,3vw,40px);left:clamp(20px,3vw,44px);right:clamp(20px,3vw,44px);color:#fff;text-align:start;pointer-events:none;
+  display:flex;flex-direction:column;gap:8px;width:min(560px,80%);margin-inline-start:auto;left:auto}
+.cmp-cap h3{font-family:var(--display);font-weight:900;font-size:clamp(20px,2.4vw,34px);line-height:1.45;margin:0}
+.cmp-cap span{font-size:clamp(13.5px,1.2vw,16px);color:rgba(255,255,255,.85)}
+.cmp-l{position:absolute;top:18px;z-index:8;padding:8px 16px;border-radius:999px;font-family:var(--head);font-weight:700;font-size:13px;pointer-events:none;transition:opacity .3s;
+  color:#fff;background:rgba(14,18,51,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3)}
+.cmp-l.a{left:18px}
+.cmp-l.b{right:18px;background:rgba(255,255,255,.85);color:var(--brand);border-color:rgba(33,86,179,.3)}
+.cmp-div{position:absolute;top:0;bottom:0;left:70%;z-index:10;width:2px;margin-left:-1px;pointer-events:none;will-change:left;
+  background:linear-gradient(to bottom,rgba(255,255,255,0),#fff 12%,#a9c4ff 50%,#fff 88%,rgba(255,255,255,0));box-shadow:0 0 18px rgba(127,166,255,.9)}
+.cmp-handle{pointer-events:auto;position:absolute;left:50%;top:50%;width:54px;height:54px;transform:translate(-50%,-50%);display:grid;place-items:center;padding:0;cursor:ew-resize;
+  border-radius:50%;border:2px solid #fff;color:#fff;background:rgba(33,86,179,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  box-shadow:0 0 0 7px rgba(127,166,255,.22),0 0 30px rgba(127,166,255,.65);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+.cmp-handle:hover{transform:translate(-50%,-50%) scale(1.06)}
+.cmp.dragging .cmp-handle{transform:translate(-50%,-50%) scale(.94);box-shadow:0 0 0 10px rgba(127,166,255,.28),0 0 40px rgba(127,166,255,.85)}
+.cmp-handle:focus-visible{outline:3px solid #fff;outline-offset:3px}
+/* a soft pulse on the handle until the visitor first touches it */
+.cmp:not(.touched) .cmp-handle::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid rgba(255,255,255,.8);animation:cmpPulse 2s ease-out infinite}
+@keyframes cmpPulse{from{transform:scale(1);opacity:.9}to{transform:scale(1.7);opacity:0}}
+@media (max-width:760px){.cmp{aspect-ratio:4/5;border-radius:22px}.cmp-handle{width:46px;height:46px}}
+@media (prefers-reduced-motion:reduce){.cmp:not(.touched) .cmp-handle::after{animation:none}}
+.cmp-cap{left:clamp(20px,3vw,44px);right:auto;margin:0;width:min(520px,60%)}

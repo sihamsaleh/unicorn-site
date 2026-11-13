@@ -58,7 +58,7 @@
   // Magic text: on every page, body text (not headings) lights up word by word as it scrolls in
   (function(){
     if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    var skip='.hero,.phero,form,[hidden],.form-done,.src,.kpis-head,.sec-title,hgroup,header,.opps,.arcx';
+    var skip='.hero,.phero,form,[hidden],.form-done,.src,.kpis-head,.sec-title,hgroup,header,.opps,.arcx,.cmp';
     var items=[];
     $$('main p, main blockquote').forEach(function(p){
       if(p.children.length||p.closest(skip)||!p.textContent.trim()||/GE SS Two/i.test(getComputedStyle(p).fontFamily)||!/[\u0600-\u06FF]/.test(p.textContent))return;
@@ -237,6 +237,54 @@
     stage.addEventListener('pointerup',function(e){if(sx===null)return;var dx=e.clientX-sx;sx=null;if(Math.abs(dx)>40)go(st.active+(dx>0?1:-1))});
     stage.addEventListener('wheel',function(e){if(Math.abs(e.deltaX)<Math.abs(e.deltaY)||Math.abs(e.deltaX)<15||st.busy)return;
       e.preventDefault();st.busy=true;setTimeout(function(){st.busy=false},450);go(st.active+(e.deltaX<0?1:-1))},{passive:false});
+  })();
+
+  // Photo / map comparator: the divider chases the pointer through a spring, with one demo sweep on first view
+  (function(){
+    var root=$('[data-compare]'); if(!root)return;
+    var top=$('.cmp-top',root),div=$('.cmp-div',root),h=$('.cmp-handle',root),la=$('.cmp-l.a',root),lb=$('.cmp-l.b',root);
+    var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var HOME=70,K=140,C=18,SWEEP=2.8;
+    var s={x:HOME,v:0,t:HOME,intro:false,done:reduced,t0:0,raf:0,last:0,drag:false,vis:false};
+    var clamp=function(v,a,b){return v<a?a:v>b?b:v};
+    var ease=function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2};
+    var lerp=function(a,b,t){return a+(b-a)*t};
+    var sweep=function(u){return u<.38?lerp(HOME,96,ease(u/.38)):u<.78?lerp(96,8,ease((u-.38)/.4)):lerp(8,HOME,ease((u-.78)/.22))};
+    var paint=function(){
+      var x=clamp(s.x,0,100);
+      top.style.clipPath='inset(0 '+(100-x).toFixed(3)+'% 0 0)';div.style.left=x.toFixed(3)+'%';
+      h.setAttribute('aria-valuenow',String(Math.round(x)));
+      la.style.opacity=x>14?'1':'0';lb.style.opacity=x<86?'1':'0';
+    };
+    var frame=function(ts){
+      var dt=Math.min(.05,Math.max(.001,(ts-s.last)/1000));s.last=ts;
+      if(s.intro){var u=(ts/1000-s.t0)/SWEEP;if(u>=1){s.intro=false;s.done=true;s.t=HOME}else s.t=sweep(u)}
+      s.v+=((s.t-s.x)*K-s.v*C)*dt;s.x=clamp(s.x+s.v*dt,0,100);
+      paint();
+      var rest=!s.intro&&!s.drag&&Math.abs(s.t-s.x)<.02&&Math.abs(s.v)<.02;
+      s.raf=(rest||!s.vis)?0:requestAnimationFrame(frame);
+    };
+    var kick=function(){if(!s.raf&&s.vis){s.last=performance.now();s.raf=requestAnimationFrame(frame)}};
+    var set=function(t){s.intro=false;s.done=true;s.t=clamp(t,0,100);root.classList.add('touched');
+      if(reduced){s.x=s.t;s.v=0;paint()}else kick()};
+    var fromEvent=function(e){var r=root.getBoundingClientRect();set((e.clientX-r.left)/Math.max(1,r.width)*100)};
+    var down=function(e){if(e.pointerType==='mouse'&&e.button!==0)return;s.drag=true;root.classList.add('dragging');
+      try{e.currentTarget.setPointerCapture(e.pointerId)}catch(_){}
+      fromEvent(e);e.preventDefault()};
+    var move=function(e){if(s.drag)fromEvent(e)};
+    var up=function(){s.drag=false;root.classList.remove('dragging')};
+    [top,h].forEach(function(el){el.addEventListener('pointerdown',down);el.addEventListener('pointermove',move);
+      el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);el.addEventListener('lostpointercapture',up)});
+    root.addEventListener('dblclick',function(){set(HOME)});
+    h.addEventListener('keydown',function(e){var st=e.shiftKey?10:2,n=s.t;
+      if(e.key==='ArrowRight'||e.key==='ArrowUp')n+=st;else if(e.key==='ArrowLeft'||e.key==='ArrowDown')n-=st;
+      else if(e.key==='Home')n=0;else if(e.key==='End')n=100;else return;e.preventDefault();set(n)});
+    paint();
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){s.vis=es[0].isIntersecting;
+        if(s.vis&&!s.done&&!s.intro&&es[0].intersectionRatio>=.45){s.intro=true;s.t0=performance.now()/1000}
+        if(s.vis)kick()},{threshold:[0,.45]}).observe(root);
+    } else {s.vis=true}
   })();
 
   // Hero curtain (#heroCurtain): dim and push the hero back as the next section covers it
