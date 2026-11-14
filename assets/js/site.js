@@ -29,6 +29,19 @@
     window.addEventListener('resize',upd); upd();
   }
 
+  // About page: calm staggered rise, section by section, one element after another
+  if(document.body.classList.contains('about') && 'IntersectionObserver' in window){
+    var asel='.eyebrow,h1,.phero .wrap>p,.kicker,.h2,.pv-lead,.prose p,.pv-val,.pv-xp li,.pv-note,.pv-edge>div,.f-card,.f-lists>div,.quote,.strip h2,.strip .btn';
+    var ao=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('mq');ao.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -60px 0px'});
+    $$('.phero .wrap, main .block .wrap, main .strip .wrap').forEach(function(g){
+      $$('.rv',g).forEach(function(el){el.classList.remove('rv','d1','d2','d3')});
+      $$(asel,g).forEach(function(el,i){el.classList.add('mi');el.style.setProperty('--k',i)});
+      g.classList.add('mq');ao.observe(g);
+    });
+    // whatever is already on screen starts right away, even if the observer is slow to report
+    setTimeout(function(){$$('.mq').forEach(function(g){if(g.getBoundingClientRect().top<window.innerHeight*.9){g.classList.remove('mq');ao.unobserve(g)}})},60);
+  }
+
   // Reveal: only elements below the first screen start hidden, so the page is complete at rest
   var io='IntersectionObserver' in window ? new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');e.target.classList.remove('pre');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'}) : null;
   $$('.rv,.bars').forEach(function(el){
