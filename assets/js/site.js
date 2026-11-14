@@ -329,6 +329,14 @@
     }else if(D)start();
   })();
 
+  // phone browser bars: while the hero fills the screen, a strip in the pool colour sits on the bottom edge so Safari tints its toolbar to match
+  (function(){
+    var h=document.body.classList.contains('home')?$('.hero'):null;if(!h)return;
+    var e=document.createElement('div');e.className='edge-b';e.setAttribute('aria-hidden','true');document.body.appendChild(e);
+    var upd=function(){document.body.classList.toggle('at-hero',window.scrollY<window.innerHeight*.5)};
+    window.addEventListener('scroll',upd,{passive:true});upd();
+  })();
+
   // Hero curtain (#heroCurtain): dim and push the hero back as the next section covers it
   var hc=document.body.classList.contains('home')?$('.hero'):null;
   if(hc && !matchMedia('(prefers-reduced-motion: reduce)').matches){

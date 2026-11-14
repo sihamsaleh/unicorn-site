@@ -1099,3 +1099,9 @@ body.menu .mnav .btn{animation-delay:.44s}
   .bwf-word-in{filter:brightness(1.9) saturate(1.2)}
   .bwf-foot{height:14%;background:linear-gradient(180deg,transparent,rgba(var(--bwf-bg-rgb),.4))}
 }
+/* phone browser bars: Safari tints them from the page edges, so match the hero photo (sky blue on top, pool lavender at the bottom) */
+.edge-b{display:none}
+@media (max-width:760px){
+  .home .hero{background-color:#1b4486}
+  body.at-hero .edge-b{display:block;position:fixed;left:0;right:0;bottom:0;height:10px;background:#4b4163;z-index:1;pointer-events:none}
+}
