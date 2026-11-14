@@ -295,6 +295,40 @@
     });
   });
 
+  // phone: the Madinah arch rises and grows with the scroll, then the heading and button come in
+  (function(){
+    var sec=$('.madinah'),fig=$('.mz-bleed'),txt=$('.mz-text');if(!sec||!fig||!txt)return;
+    var mq=matchMedia('(max-width:860px)'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches,raf=0;
+    var upd=function(){raf=0;
+      if(!mq.matches||rm){sec.style.setProperty('--mzp','1');sec.style.setProperty('--mzt','1');return}
+      var H=window.innerHeight,ft=fig.getBoundingClientRect().top,tt=txt.getBoundingClientRect().top;
+      var p=Math.min(1,Math.max(0,(H-ft)/(H*.85))),t=Math.min(1,Math.max(0,(H-tt)/(H*.45)));
+      sec.style.setProperty('--mzp',p.toFixed(3));sec.style.setProperty('--mzt',t.toFixed(3));
+    };
+    var req=function(){if(!raf)raf=requestAnimationFrame(upd)};
+    window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);upd();
+  })();
+
+  // heroTilt: on phones the hero photo follows the phone's tilt; without a gyroscope it drifts slowly
+  (function(){
+    var h=$('.hero');if(!h||!matchMedia('(max-width:760px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    var got=false,b0=null,g0=null,raf=0,tx=0,ty=0;
+    var on=function(e){if(e.beta==null)return;
+      if(!got){got=true;h.classList.remove('drift');b0=e.beta;g0=e.gamma}
+      var g=Math.max(-20,Math.min(20,e.gamma-g0)),b=Math.max(-20,Math.min(20,e.beta-b0));
+      tx=(-g*1.1).toFixed(1);ty=(-b*.9).toFixed(1);
+      if(!raf)raf=requestAnimationFrame(function(){raf=0;h.style.setProperty('--tx',tx+'px');h.style.setProperty('--ty',ty+'px')});
+      b0+=(e.beta-b0)*.004;g0+=(e.gamma-g0)*.004; // slowly re-centre so holding it at any angle feels natural
+    };
+    var start=function(){window.addEventListener('deviceorientation',on,{passive:true})};
+    h.classList.add('drift');
+    var D=window.DeviceOrientationEvent;
+    if(D&&typeof D.requestPermission==='function'){ // iPhone asks once, after the first touch
+      var ask=function(){D.requestPermission().then(function(s){if(s==='granted')start()}).catch(function(){})};
+      window.addEventListener('touchend',ask,{once:true});
+    }else if(D)start();
+  })();
+
   // Hero curtain (#heroCurtain): dim and push the hero back as the next section covers it
   var hc=document.body.classList.contains('home')?$('.hero'):null;
   if(hc && !matchMedia('(prefers-reduced-motion: reduce)').matches){
