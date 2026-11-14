@@ -1328,3 +1328,13 @@ body.menu .mnav .btn{animation-delay:.44s}
 .home .hero .hero-vid{transform:scale(calc(1 + var(--hp,0)*.06));filter:brightness(calc(1 - var(--hp,0)*.45));transform-origin:50% 40%}
 @media (max-width:760px){.home .hero .hero-vid{object-position:58% 50%;scale:1.14;translate:var(--tx,0px) var(--ty,0px);transition:opacity 1.2s ease,translate .35s cubic-bezier(.2,.7,.3,1)}}
 @media (prefers-reduced-motion:reduce){.hero .hero-vid{display:none}}
+
+/* About: testimonials with a giant faded quote mark behind the words (first card navy) */
+.qwm .quote{position:relative;overflow:hidden;border-radius:20px;padding-top:56px}
+.qwm .quote blockquote{position:relative;font-family:var(--display);font-size:clamp(21px,2vw,27px);line-height:1.65}
+.qwm .quote blockquote::before{position:absolute;top:-70px;inset-inline-end:-10px;font-family:Georgia,serif;font-size:300px;line-height:1;color:var(--brand);opacity:.07;margin:0;pointer-events:none}
+.qwm .quote:first-child{background:var(--ink);border-color:var(--ink)}
+.qwm .quote:first-child blockquote{color:#fff}
+.qwm .quote:first-child blockquote::before{color:#fff;opacity:.08}
+.qwm .quote:first-child cite{color:rgba(255,255,255,.7)}
+.qwm .quote:first-child cite b{color:#fff}
