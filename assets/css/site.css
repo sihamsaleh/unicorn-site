@@ -1167,3 +1167,12 @@ body.menu .mnav .btn{animation-delay:.44s}
 /* room inside each row so the card shadow fades out instead of being cut by the row's edge */
 .pt-row{padding-block:14px 34px}
 .pt-row+.pt-row{margin-top:-28px}
+
+/* «خدماتنا» on the home page now has seven cards: on wide screens three per row, the last one centred */
+@media (min-width:821px){.flips{grid-template-columns:repeat(6,minmax(0,1fr))}.flips>.flipc{grid-column:span 2}.flips>.flipc:nth-child(7):last-child{grid-column:3/5}}
+/* the new services' icons on the services page, drawn in the brand blue */
+.svc-item svg.svc-ic96{width:48px;height:48px;stroke-width:3}
+.svc-item svg.svc-ic96 .dt{fill:rgba(33,86,179,.12);stroke:none}
+.svc-item svg.svc-ic96 .ac{stroke:#7fa6ff}
+/* home «خدماتنا» on computers: hide «الاستشارات المالية», leaving two even rows of three */
+@media (min-width:821px){.home .flips>.flipc[href$="#financial"]{display:none}.home .flips>.flipc:nth-child(7):last-child{grid-column:span 2}}
