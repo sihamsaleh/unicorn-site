@@ -1030,3 +1030,7 @@ h1,h2,h3,.h2,.sec-title,.hero-cap .shiny,.intro h1,.kpis-head h3,.strip h2,.cta 
 .bwf-l6 .bwf-soc:hover,.bwf-l6 .bwf-soc:focus-visible{background:rgba(255,255,255,.18);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
 @media (max-width:760px){.bwf-l6 .bwf-cta{justify-self:start}}
 @media (prefers-reduced-motion:reduce){.bwf-l6 .bwf-go::before{animation:none}}
+/* blue buttons in the exact logo blue, solid instead of see-through */
+.band .btn-light,.band .btn-light:hover,.btn:not(.btn-light):not(.btn-ink):not(.btn-line){background:#2156b3;color:#fff}
+.band .btn-light:hover,.btn:not(.btn-light):not(.btn-ink):not(.btn-line):hover{background:#1c4aa0}
+.band .btn-light::after,.btn:not(.btn-light):not(.btn-ink):not(.btn-line)::after{opacity:.35}
