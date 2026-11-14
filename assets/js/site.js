@@ -32,7 +32,7 @@
   // About page: calm staggered rise, section by section, one element after another
   if(document.body.classList.contains('about') && 'IntersectionObserver' in window){
     var asel='.eyebrow,h1,.phero .wrap>p,.kicker,.h2,.pv-lead,.prose p,.pv-val,.pv-xp li,.pv-note,.pv-edge>div,.f-card,.f-lists>div,.quote,.strip h2,.strip .btn';
-    var ao=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('mq');ao.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -60px 0px'});
+    var ao=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('mq');ao.unobserve(e.target)}})},{threshold:0,rootMargin:'0px 0px -8% 0px'});
     $$('.phero .wrap, main .block .wrap, main .strip .wrap').forEach(function(g){
       $$('.rv',g).forEach(function(el){el.classList.remove('rv','d1','d2','d3')});
       $$(asel,g).forEach(function(el,i){el.classList.add('mi');el.style.setProperty('--k',i)});
@@ -71,7 +71,7 @@
   // Magic text: on every page, body text (not headings) lights up word by word as it scrolls in
   (function(){
     if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    var skip='.hero,.phero,form,[hidden],.form-done,.src,.kpis-head,.sec-title,hgroup,header,.opps,.arcx,.cmp';
+    var skip='body.about,.hero,.phero,form,[hidden],.form-done,.src,.kpis-head,.sec-title,hgroup,header,.opps,.arcx,.cmp';
     var items=[];
     $$('main p, main blockquote').forEach(function(p){
       if(p.children.length||p.closest(skip)||!p.textContent.trim()||/GE SS Two/i.test(getComputedStyle(p).fontFamily)||!/[\u0600-\u06FF]/.test(p.textContent))return;
