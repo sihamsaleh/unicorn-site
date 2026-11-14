@@ -1105,3 +1105,33 @@ body.menu .mnav .btn{animation-delay:.44s}
   .home .hero{background-color:#1b4486}
   body.at-hero .edge-b{display:block;position:fixed;left:0;right:0;bottom:0;height:10px;background:#4b4163;z-index:1;pointer-events:none}
 }
+
+/* phone hero: smoother tilt (the script eases it) and one slow, flowing entrance: logo first, the title follows as the logo settles */
+@keyframes heroRise{from{opacity:0;transform:translateY(22px);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
+@media (max-width:760px){
+  .hero picture img{transition:none}
+  .hero.drift picture img{animation:heroZoom 14s ease-out both,heroDrift 24s ease-in-out 2s infinite alternate}
+  .hero-mobile-title .logo{animation:heroRise 2.2s .5s cubic-bezier(.22,1,.36,1) both}
+  .hero-cap .shiny .w{animation:heroRise 2.2s cubic-bezier(.22,1,.36,1) both;animation-delay:1.5s}
+  .hero-cap .shiny .w:nth-of-type(n+3){animation-delay:1.9s}
+}
+@media (max-width:760px) and (prefers-reduced-motion:reduce){.hero-mobile-title .logo,.hero-cap .shiny .w{animation:none}}
+/* phone hero, final timing: logo in at a medium pace, the title straight after it; the photo stays still and only glides with the phone's tilt */
+@media (max-width:760px){
+  .hero picture img,.hero.drift picture img{animation:none}
+  .hero-mobile-title .logo{animation:heroRise 1.3s .3s cubic-bezier(.22,1,.36,1) both}
+  .hero-cap .shiny .w{animation:heroRise 1.3s cubic-bezier(.22,1,.36,1) both;animation-delay:1.45s}
+  .hero-cap .shiny .w:nth-of-type(n+3){animation-delay:1.7s}
+}
+@media (max-width:760px) and (prefers-reduced-motion:reduce){.hero-mobile-title .logo,.hero-cap .shiny .w{animation:none}}
+/* phone hero logo: option 8, it rises like the title so both read as one motion */
+@media (max-width:760px){.hero-mobile-title .logo{animation:heroRise 1.3s .2s cubic-bezier(.22,1,.36,1) both}}
+@media (max-width:760px) and (prefers-reduced-motion:reduce){.hero-mobile-title .logo{animation:none}}
+/* phone: the intro heading a little bigger */
+@media (max-width:760px){.band .intro h1{font-size:clamp(33px,9.2vw,38px);line-height:1.4}}
+/* phone hero title: starts right as the logo settles, and comes in slowly and calmly */
+@media (max-width:760px){
+  .hero-cap .shiny .w{animation:heroRise 2.2s cubic-bezier(.25,.8,.3,1) both;animation-delay:.9s}
+  .hero-cap .shiny .w:nth-of-type(n+3){animation-delay:1.2s}
+}
+@media (max-width:760px) and (prefers-reduced-motion:reduce){.hero-cap .shiny .w{animation:none}}

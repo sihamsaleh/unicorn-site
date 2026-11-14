@@ -309,21 +309,27 @@
     window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);upd();
   })();
 
-  // heroTilt: on phones the hero photo follows the phone's tilt; without a gyroscope it drifts slowly
+  // heroTilt: on phones the hero photo follows the phone's tilt, eased so hand tremor never shows; without a gyroscope it drifts slowly
   (function(){
     var h=$('.hero');if(!h||!matchMedia('(max-width:760px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    var got=false,b0=null,g0=null,raf=0,tx=0,ty=0;
+    var got=false,b0=0,g0=0,tx=0,ty=0,cx=0,cy=0,loop=0;
+    var step=function(){
+      cx+=(tx-cx)*.045;cy+=(ty-cy)*.045; // slow follow: the photo glides instead of jumping
+      h.style.setProperty('--tx',cx.toFixed(2)+'px');h.style.setProperty('--ty',cy.toFixed(2)+'px');
+      loop=(Math.abs(tx-cx)>.05||Math.abs(ty-cy)>.05)?requestAnimationFrame(step):0;
+    };
     var on=function(e){if(e.beta==null)return;
-      if(!got){got=true;h.classList.remove('drift');b0=e.beta;g0=e.gamma}
-      var g=Math.max(-20,Math.min(20,e.gamma-g0)),b=Math.max(-20,Math.min(20,e.beta-b0));
-      tx=(-g*1.1).toFixed(1);ty=(-b*.9).toFixed(1);
-      if(!raf)raf=requestAnimationFrame(function(){raf=0;h.style.setProperty('--tx',tx+'px');h.style.setProperty('--ty',ty+'px')});
-      b0+=(e.beta-b0)*.004;g0+=(e.gamma-g0)*.004; // slowly re-centre so holding it at any angle feels natural
+      if(!got){got=true;h.classList.remove('drift');h.classList.add('tilt');b0=e.beta;g0=e.gamma}
+      b0+=(e.beta-b0)*.01;g0+=(e.gamma-g0)*.01; // re-centre slowly so any holding angle feels natural
+      var g=e.gamma-g0,b=e.beta-b0;
+      if(Math.abs(g)<1.5)g=0;if(Math.abs(b)<1.5)b=0; // ignore tiny hand tremor
+      tx=Math.max(-12,Math.min(12,-g*.6));ty=Math.max(-10,Math.min(10,-b*.5));
+      if(!loop)loop=requestAnimationFrame(step);
     };
     var start=function(){window.addEventListener('deviceorientation',on,{passive:true})};
     h.classList.add('drift');
     var D=window.DeviceOrientationEvent;
-    if(D&&typeof D.requestPermission==='function'){ // iPhone asks once, after the first touch
+    if(D&&typeof D.requestPermission==='function'){
       var ask=function(){D.requestPermission().then(function(s){if(s==='granted')start()}).catch(function(){})};
       window.addEventListener('touchend',ask,{once:true});
     }else if(D)start();
