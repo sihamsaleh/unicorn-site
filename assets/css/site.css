@@ -1082,7 +1082,7 @@ h1,h2,h3,.h2,.sec-title,.hero-cap .shiny,.intro h1,.kpis-head h3,.strip h2,.cta 
 }
 @media (max-width:760px) and (prefers-reduced-motion:reduce){.hero-cap .shiny .w{animation:none}}
 /* phone menu (option 4): the Madinah photo behind in the brand navy, big heading-font links rising one by one */
-.mnav{background:linear-gradient(to bottom,rgba(26,29,58,.55),rgba(26,29,58,.88) 70%),url(../img/madinah-6.jpg) 40% center/cover}
+.mnav{background:linear-gradient(to bottom,rgba(26,29,58,.55),rgba(26,29,58,.88) 70%),url(../img/madinah-6.jpg?v=c1) 40% center/cover}
 .mnav a{font-family:var(--display);font-weight:900;font-size:28px;padding-block:8px;transition:none}
 .mnav .btn{font-family:var(--head);font-weight:500;width:100%;justify-content:center}
 body.menu .hdr .logo{opacity:1!important;pointer-events:auto}
@@ -1152,3 +1152,18 @@ body.menu .mnav .btn{animation-delay:.44s}
 /* divider before «خدماتنا»: one wide arc in navy, no line (replaces the gradient) */
 .home main>.wave-div.wave-navy.arc-div{position:relative;height:clamp(80px,7vw,110px);background:transparent;margin-bottom:-1px}
 .arc-div svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+/* «شركاؤنا»: two rows of partner logos gliding in opposite directions, on white */
+.partners{background:#fff;padding-block:clamp(50px,7vw,100px)}
+.partners .sec-title{text-align:center;margin-bottom:clamp(22px,3vw,40px)}
+.pt-row{overflow:hidden;padding-block:8px;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.pt-track{display:flex;gap:clamp(14px,1.6vw,22px);width:max-content;animation:ptMove 40s linear infinite}
+.pt-rev .pt-track{animation-direction:reverse;animation-duration:46s}
+.pt-row:hover .pt-track{animation-play-state:paused}
+.pt-logo{flex:none;width:clamp(150px,13vw,190px);height:clamp(86px,7.4vw,108px);background:#fff;border-radius:18px;border:1px solid #ececf4;box-shadow:0 12px 26px -20px rgba(14,18,51,.35);display:grid;place-items:center;padding:12px}
+.pt-logo img{max-width:100%;max-height:clamp(56px,4.9vw,74px);width:auto;height:auto;object-fit:contain}
+@keyframes ptMove{to{transform:translateX(33.333%)}}
+@media (prefers-reduced-motion:reduce){.pt-track{animation:none}}
+/* room inside each row so the card shadow fades out instead of being cut by the row's edge */
+.pt-row{padding-block:14px 34px}
+.pt-row+.pt-row{margin-top:-28px}
