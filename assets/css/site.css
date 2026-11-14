@@ -1308,3 +1308,23 @@ body.menu .mnav .btn{animation-delay:.44s}
 .edge-side .pv-edge>div:first-child::before{top:10px}
 @media (max-width:760px){.edge-side{grid-template-columns:1fr}.edge-side .pv-head{position:static;margin-bottom:20px}}
 .edge-side .pv-edge h3{font-family:var(--display);font-size:clamp(21px,2vw,26px);line-height:1.45;margin-bottom:6px}
+
+/* About: founder with certificate badges (gold top line, CERTIFIED label) and checked programme lists */
+.fb .f-card{border-radius:22px}
+.fb .f-card .mono{display:none}
+.fb .f-card h3{font-family:var(--display);font-size:30px}
+.fb .f-lists>div:first-child{grid-column:1/-1}
+.fb .f-lists .wide-col{grid-column:auto}
+.fb .f-lists>div:first-child ul{grid-template-columns:repeat(3,1fr);gap:12px}
+.fb .f-lists>div:first-child li{background:#fff;border:1px solid var(--line);border-top:3px solid #c9a86a;border-radius:6px 6px 16px 16px;padding:42px 20px 22px;color:var(--ink);font-family:var(--display);font-size:18px;line-height:1.5}
+.fb .f-lists>div:first-child li::before{content:"CERTIFIED";width:auto;height:auto;background:none;top:16px;inset-inline-start:20px;font-family:var(--latin);font-size:10.5px;letter-spacing:.24em;color:#a8874c}
+.fb .f-lists>div:not(:first-child) li{padding-inline-start:28px}
+.fb .f-lists>div:not(:first-child) li::before{width:18px;height:18px;top:.25em;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%232156b3%27 stroke-width=%272.6%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M5 12.5l4.5 4.5L19 7.5%27/%3E%3C/svg%3E") center/14px no-repeat,#eef3fd}
+@media (max-width:760px){.fb .f-lists>div:first-child ul{grid-template-columns:1fr}}
+
+/* Home hero video: sits exactly over the photo and fades in once it is really playing */
+.hero .hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;opacity:0;transition:opacity 1.2s ease;pointer-events:none}
+.hero .hero-vid.on{opacity:1}
+.home .hero .hero-vid{transform:scale(calc(1 + var(--hp,0)*.06));filter:brightness(calc(1 - var(--hp,0)*.45));transform-origin:50% 40%}
+@media (max-width:760px){.home .hero .hero-vid{object-position:58% 50%;scale:1.14;translate:var(--tx,0px) var(--ty,0px);transition:opacity 1.2s ease,translate .35s cubic-bezier(.2,.7,.3,1)}}
+@media (prefers-reduced-motion:reduce){.hero .hero-vid{display:none}}

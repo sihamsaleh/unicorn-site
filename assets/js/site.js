@@ -322,6 +322,16 @@
     window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);upd();
   })();
 
+  // Home hero video: show it only once frames are actually playing, so the photo never flashes to black
+  (function(){
+    var v=$('.hero-vid');if(!v)return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();return}
+    var show=function(){v.classList.add('on')};
+    v.addEventListener('playing',show);
+    if(!v.paused&&v.readyState>2)show();
+    var p=v.play();if(p&&p.catch)p.catch(function(){});
+  })();
+
   // heroTilt: on phones the hero photo follows the phone's tilt, eased so hand tremor never shows; without a gyroscope it drifts slowly
   (function(){
     var h=$('.hero');if(!h||!matchMedia('(max-width:760px)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
