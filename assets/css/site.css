@@ -1278,3 +1278,33 @@ body.menu .mnav .btn{animation-delay:.44s}
 .vmx .v p{color:#fff}
 .vmx .v .lb{color:#9fb8ff}
 @media (max-width:760px){.vmx{grid-template-columns:1fr}.vmx>div{min-height:0}}
+
+/* About: values on a navy band with gold numbers; experience as cards with a blue icon circle */
+.vals-navy{background:var(--ink);border-radius:28px;padding:clamp(34px,4vw,60px)}
+.vals-navy .kicker{color:#c9a86a}
+.vals-navy .h2{color:#fff}
+.vals-navy .pv-vals{border-top-color:rgba(255,255,255,.15)}
+.vals-navy .pv-val{border-color:rgba(255,255,255,.15)!important}
+.vals-navy .pv-val>b{color:#c9a86a}
+.vals-navy .pv-val h3{color:#fff}
+.vals-navy .pv-val p{color:rgba(255,255,255,.72)}
+.xp-cards .pv-xp li{border-radius:18px;flex-direction:column;align-items:flex-start;gap:20px;padding:28px}
+.xp-cards .pv-xp li svg{box-sizing:content-box;padding:14px;border-radius:50%;background:linear-gradient(135deg,#2156b3,#1a1d3a);stroke:#fff;width:30px;height:30px}
+@media (max-width:760px){.vals-navy{margin-inline:var(--gutter);padding:30px 20px;border-radius:22px}}
+
+/* Value descriptions: words split by the scroll effect must not take the number style */
+.pv-val p b{display:inline;font:inherit;letter-spacing:inherit;color:inherit;margin:0}
+
+/* Phone: values as full-width rows separated by lines (number, then title and description) */
+@media (max-width:760px){.vals-navy .pv-vals{grid-template-columns:1fr}.vals-navy .pv-val{display:grid;grid-template-columns:40px 1fr;align-items:baseline;column-gap:14px;border-inline-start:0!important;border-bottom:1px solid rgba(255,255,255,.15);padding:22px 2px}.vals-navy .pv-val>b{margin:0}.vals-navy .pv-val h3{margin:0 0 6px;font-size:20px}.vals-navy .pv-val p{grid-column:2}.vals-navy .pv-val:last-child{border-bottom:0;padding-bottom:4px}}
+
+/* About: «what sets Unicorn apart» with the heading fixed at the side and a checked list */
+.edge-side{display:grid;grid-template-columns:1fr 1.8fr;column-gap:clamp(30px,5vw,80px);align-items:start}
+.edge-side .pv-head{position:sticky;top:120px;margin:0}
+.edge-side .pv-edge{grid-template-columns:1fr;gap:0}
+.edge-side .pv-edge>div{background:none;border:0;border-bottom:1px solid var(--line);padding:26px 0;padding-inline-start:50px;position:relative;grid-column:auto}
+.edge-side .pv-edge>div:first-child{padding-top:6px}
+.edge-side .pv-edge>div::before{content:"";position:absolute;inset-inline-start:0;top:30px;width:30px;height:30px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27white%27 stroke-width=%272.4%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M5 12.5l4.5 4.5L19 7.5%27/%3E%3C/svg%3E") center/16px no-repeat,var(--brand)}
+.edge-side .pv-edge>div:first-child::before{top:10px}
+@media (max-width:760px){.edge-side{grid-template-columns:1fr}.edge-side .pv-head{position:static;margin-bottom:20px}}
+.edge-side .pv-edge h3{font-family:var(--display);font-size:clamp(21px,2vw,26px);line-height:1.45;margin-bottom:6px}
