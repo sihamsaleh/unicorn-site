@@ -335,12 +335,18 @@
     }else if(D)start();
   })();
 
-  // phone browser bars: while the hero fills the screen, a strip in the pool colour sits on the bottom edge so Safari tints its toolbar to match
+  // phone browser bars: Safari tints its bottom toolbar from what touches the bottom edge, so a thin strip there
+  // takes the hero's pool colour while the hero fills the screen, and the footer navy once the footer reaches the bottom
   (function(){
-    var h=document.body.classList.contains('home')?$('.hero'):null;if(!h)return;
+    var h=document.body.classList.contains('home')?$('.hero'):null,ft=$('.bwf');
     var e=document.createElement('div');e.className='edge-b';e.setAttribute('aria-hidden','true');document.body.appendChild(e);
-    var upd=function(){document.body.classList.toggle('at-hero',window.scrollY<window.innerHeight*.5)};
-    window.addEventListener('scroll',upd,{passive:true});upd();
+    var upd=function(){
+      var H=window.innerHeight,c='';
+      if(h&&window.scrollY<H*.5)c='#4b4163';
+      else if(ft&&ft.getBoundingClientRect().top<H-20)c='#1a1d3a';
+      document.body.classList.toggle('at-edge',!!c);if(c)e.style.background=c;
+    };
+    window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
   })();
 
   // Hero curtain (#heroCurtain): dim and push the hero back as the next section covers it

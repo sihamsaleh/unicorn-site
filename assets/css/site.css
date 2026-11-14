@@ -1135,3 +1135,10 @@ body.menu .mnav .btn{animation-delay:.44s}
   .hero-cap .shiny .w:nth-of-type(n+3){animation-delay:1.2s}
 }
 @media (max-width:760px) and (prefers-reduced-motion:reduce){.hero-cap .shiny .w{animation:none}}
+
+/* phone browser bars: an opaque header so Safari tints the top bar with it, and the bottom strip shown on the hero and the footer */
+@media (max-width:760px){
+  .hdr.solid{background:#f7f5f9}
+  body.at-hero .edge-b{display:none}
+  body.at-edge .edge-b{display:block;position:fixed;left:0;right:0;bottom:0;height:10px;z-index:1;pointer-events:none}
+}
