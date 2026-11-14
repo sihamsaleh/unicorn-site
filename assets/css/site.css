@@ -1142,3 +1142,9 @@ body.menu .mnav .btn{animation-delay:.44s}
   body.at-hero .edge-b{display:none}
   body.at-edge .edge-b{display:block;position:fixed;left:0;right:0;bottom:0;height:10px;z-index:1;pointer-events:none}
 }
+
+/* divider before «خدماتنا»: a soft fade from the page colour to navy with a gentle blue glow, replacing the wave */
+.home main>.wave-div.wave-navy.grad-div{position:relative;overflow:hidden;height:clamp(150px,14vw,220px);background:linear-gradient(to bottom,var(--paper,#f7f5f9),#aab0d2 40%,#1a1d3a 88%)}
+.grad-div .grad-glow{position:absolute;left:50%;top:52%;width:120%;height:56%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(33,86,179,.55),transparent);filter:blur(10px)}
+.home #find{padding-bottom:clamp(36px,4vw,64px)}
+.home main>.wave-navy+section.svc-navy{padding-top:clamp(10px,2vw,40px)}
