@@ -1426,3 +1426,7 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 
 /* Home: more room between the opportunity photos and the navy curve */
 .home #opportunity{padding-bottom:clamp(56px,7vw,110px)}
+
+/* Home: tighter gap between the pills and Partners */
+.home #find{padding-bottom:clamp(20px,2.4vw,36px)}
+.home #find+.partners{padding-top:clamp(28px,3.4vw,52px)}
