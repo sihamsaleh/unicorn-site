@@ -1383,3 +1383,23 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 /* Indicators on phones: no live blur and no tap-lift, so the tiles stay still while scrolling and counting */
 @media (max-width:760px){.kpis .ki{-webkit-backdrop-filter:none;backdrop-filter:none;background:linear-gradient(145deg,#fff,#f1f4fc 55%,#f7f8fd)}}
 @media (hover:none){.kpis.k-go li:hover .ki{transform:none;box-shadow:0 24px 44px -20px rgba(27,52,128,.45),0 6px 14px -6px rgba(27,52,128,.18),inset 0 1px 0 #fff,inset 0 -14px 24px -10px rgba(33,86,179,.16),inset 0 0 0 1px rgba(33,86,179,.06)}}
+
+/* Home services: white band under the partners */
+.home .svc-home{background:#fff}
+
+/* Home services: short landscape cards, white with a large faded icon in the corner */
+.svc-home .flipc{height:172px}
+.svc-home .flipc-f{color:var(--ink);background:linear-gradient(180deg,#fff,#f5f7fd);border:1px solid #e6e9f4;box-shadow:0 20px 40px -30px rgba(27,52,128,.35);justify-content:flex-end;gap:10px;border-radius:22px}
+.svc-home .flipc-b{border-radius:22px;gap:10px}
+.svc-home .flipc-b h3{display:none}
+.svc-home .flipc-ic{position:absolute;left:-22px;bottom:-22px;width:150px;height:150px;opacity:.13;color:var(--brand)}
+.svc-home .flipc-ic .dt{fill:rgba(33,86,179,.1)}
+.svc-home .flipc-ic .ac{stroke:#4a7be0}
+.svc-home .flipc-en{color:var(--brand);margin-bottom:4px}
+.svc-home .flipc-f>div{position:relative;max-width:82%}
+.svc-home .flipc-hint{position:relative}
+@media (max-width:820px){.svc-home .flipc{height:150px}.svc-home .flipc-ic{width:130px;height:130px}}
+
+/* Home services: smaller faded icons */
+.svc-home .flipc-ic{width:112px;height:112px;left:-12px;bottom:-12px}
+@media (max-width:820px){.svc-home .flipc-ic{width:98px;height:98px}}
