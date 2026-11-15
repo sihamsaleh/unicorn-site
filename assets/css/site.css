@@ -1379,3 +1379,7 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 /* Home map: navy band, flowing on from Services into the footer */
 .home .cmp-sec{background:#1a1d3a;padding-top:0;margin-top:-1px}
 .home .cmp-sec .cmp{box-shadow:0 30px 60px -36px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.12)}
+
+/* Indicators on phones: no live blur and no tap-lift, so the tiles stay still while scrolling and counting */
+@media (max-width:760px){.kpis .ki{-webkit-backdrop-filter:none;backdrop-filter:none;background:linear-gradient(145deg,#fff,#f1f4fc 55%,#f7f8fd)}}
+@media (hover:none){.kpis.k-go li:hover .ki{transform:none;box-shadow:0 24px 44px -20px rgba(27,52,128,.45),0 6px 14px -6px rgba(27,52,128,.18),inset 0 1px 0 #fff,inset 0 -14px 24px -10px rgba(33,86,179,.16),inset 0 0 0 1px rgba(33,86,179,.06)}}

@@ -53,6 +53,14 @@
   if(kp && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches && kp.getBoundingClientRect().top>window.innerHeight*.85){
     var nums=$$('b .n',kp);
     nums.forEach(function(n){n.dataset.to=n.textContent;n.textContent=(0).toFixed((n.textContent.split('.')[1]||'').length)});
+    // keep each counting number at a fixed width (widest digit x digit count) so the row never wobbles
+    var fixW=function(){nums.forEach(function(n){
+      var to=n.dataset.to,t=document.createElement('span'),mx=0;t.style.cssText='position:absolute;visibility:hidden;white-space:pre';n.parentElement.appendChild(t);
+      for(var d=0;d<10;d++){t.textContent=String(d);mx=Math.max(mx,t.getBoundingClientRect().width)}
+      t.textContent=to.replace(/[0-9]/g,'');var rest=t.getBoundingClientRect().width;t.remove();
+      n.style.width=Math.ceil(mx*to.replace(/[^0-9]/g,'').length+rest+1)+'px';n.style.textAlign='left';
+    })};
+    fixW();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fixW);
     kp.classList.add('k-pre');
     var ko=new IntersectionObserver(function(es){
       if(!es[0].isIntersecting)return; ko.disconnect();
