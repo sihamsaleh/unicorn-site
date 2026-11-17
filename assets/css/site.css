@@ -1430,3 +1430,29 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 /* Home: tighter gap between the pills and Partners */
 .home #find{padding-bottom:clamp(20px,2.4vw,36px)}
 .home #find+.partners{padding-top:clamp(28px,3.4vw,52px)}
+
+/* Deal arrangement page: the intro as one large centred lead paragraph */
+.deal-intro .wrap{max-width:900px}
+.deal-intro p{font-family:var(--head);font-size:clamp(20px,2.1vw,27px);line-height:1.9;color:var(--ink);text-align:center;margin:0;text-wrap:pretty}
+
+/* Header: "More" dropdown holding Our work and Investment opportunities */
+.nav-more>button{gap:7px;background:none;border:0;color:inherit;cursor:pointer;font:inherit}
+.nav-more>button svg{width:10px;height:6px}
+.nav-more>button[data-current]::after{transform:scaleX(1)}
+.nav-more ul{top:calc(100% + 6px);inset-inline-start:-14px;min-width:220px;border-radius:18px;padding:8px;box-shadow:0 24px 50px -20px rgba(14,18,51,.35),0 0 0 1px rgba(26,29,58,.06)}
+.nav-more ul::before{content:"";position:absolute;inset-inline:0;top:-12px;height:12px}
+.nav-more li a{border-radius:12px;padding:11px 16px;font-family:var(--display);font-weight:900;font-size:16px;color:var(--ink)}
+.nav-more li a[aria-current="page"]{background:var(--paper);color:var(--brand)}
+
+/* Header "More": three lines instead of a word */
+.nav-more>button{width:40px;height:40px;justify-content:center;padding:0;border-radius:50%;transition:background .3s}
+.nav-more>button svg{width:22px;height:16px;transform:none!important}
+.nav-more>button::after{display:none}
+.nav-more>button:hover,.nav-more.open>button{background:rgba(255,255,255,.14)}
+.hdr.solid .nav-more>button:hover,.hdr.solid .nav-more.open>button{background:rgba(26,29,58,.07)}
+.nav-more>button[data-current]{background:rgba(255,255,255,.14)}
+.hdr.solid .nav-more>button[data-current]{background:rgba(26,29,58,.07)}
+.nav-more ul{inset-inline-start:auto;inset-inline-end:-10px}
+.nav-more:hover ul,.nav-more:focus-within ul{opacity:0;visibility:hidden;transform:translateY(8px)}
+.nav-more>button:focus:not(:focus-visible){outline:none}
+.nav-more.open ul{opacity:1;visibility:visible;transform:none}

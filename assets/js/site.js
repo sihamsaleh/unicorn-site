@@ -7,6 +7,14 @@
   window.addEventListener('scroll',onScroll,{passive:true});
 
   // Mobile menu
+  // Header "More" dropdown: opens on hover (CSS) and on click/tap, closes on outside click or Escape
+  $$('.nav-more').forEach(function(dd){
+    var b=dd.querySelector('button');
+    var set=function(o){dd.classList.toggle('open',o);b.setAttribute('aria-expanded',o)};
+    b.addEventListener('click',function(e){e.stopPropagation();set(!dd.classList.contains('open'))});
+    document.addEventListener('click',function(e){if(!dd.contains(e.target))set(false)});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
+  });
   var burger=$('#burger');
   if(burger){
     burger.addEventListener('click',function(){var o=document.body.classList.toggle('menu');burger.setAttribute('aria-expanded',o)});
