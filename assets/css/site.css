@@ -1456,3 +1456,6 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 .nav-more:hover ul,.nav-more:focus-within ul{opacity:0;visibility:hidden;transform:translateY(8px)}
 .nav-more>button:focus:not(:focus-visible){outline:none}
 .nav-more.open ul{opacity:1;visibility:visible;transform:none}
+
+/* Home services: split long titles into even lines so no word sits alone */
+.svc-home .flipc h3{text-wrap:balance}
