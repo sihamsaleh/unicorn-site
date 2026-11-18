@@ -86,7 +86,7 @@
 
   // Magic text: on every page, body text (not headings) lights up word by word as it scrolls in
   (function(){
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    return; // turned off: text shows at once, no word-by-word motion
     var skip='body.about,.hero,.phero,form,[hidden],.form-done,.src,.kpis-head,.sec-title,hgroup,header,.opps,.arcx,.cmp';
     var items=[];
     $$('main p, main blockquote').forEach(function(p){
