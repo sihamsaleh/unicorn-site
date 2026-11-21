@@ -1629,3 +1629,4 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 @media (max-width:620px){.inv-fdi>.kicker,.inv-fdi>h2{order:-2}.inv-fdi>.fdi-card{order:-1}}
 @media (max-width:620px){.art .art-sec:has(.inv-pillars)>h2,.art .ig-text>h2,.art .inv-fdi>h2{font-size:31px}}
 .art.art-inv .art-lead p,.art.art-inv .art-lead p:first-child{font-size:clamp(17px,1.5vw,18px);line-height:1.95}
+.art .inv-fdi .fdi-after{max-width:none;align-self:stretch;padding-inline:clamp(18px,2.6vw,32px);text-align:justify;text-align-last:center}
