@@ -230,6 +230,7 @@
 .q-qa p{color:var(--q-mut);font-size:clamp(15px,1.5cqw,17px);line-height:2;padding:0 4px 24px;max-width:75ch}
 /* one continuous gradient across the page */
 .d-stage{position:relative;isolation:isolate;overflow:hidden;background:
+  linear-gradient(180deg,transparent calc(100% - 360px),#1a1d3a),
   radial-gradient(60% 40% at 85% 6%,rgba(44,47,107,.95),transparent 70%),
   radial-gradient(50% 35% at 10% 30%,rgba(95,63,94,.45),transparent 70%),
   radial-gradient(55% 30% at 90% 70%,rgba(44,47,107,.7),transparent 70%),
@@ -239,6 +240,8 @@
 .d-stage .q-sec::before,.d-stage .q-sec::after{display:none}
 .d-stage .q-sec{padding-bottom:clamp(28px,3.5cqw,48px)}
 .d-stage .q-faq{padding-top:0}
+/* blend into footer */
+.bwf .bwf-rule{display:none}
 /* page tabs */
 .q-tabbar.q-top{padding-top:calc(var(--hdr-h,126px) + clamp(16px,3cqw,36px))}
 .q-tabbar{background:var(--q-page);padding:clamp(28px,4cqw,48px) 16px 0;display:flex;justify-content:center}
