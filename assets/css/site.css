@@ -1750,3 +1750,5 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 @media(max-width:900px){.phero.cphero{padding-top:120px}}
 .cphero .form p{animation:none;max-width:none;margin-top:0;font-size:13px;opacity:1}
 .cphero .c-info .cg-head p{color:#fff}
+.done .cfall{display:block;margin-top:8px;font-size:13px;opacity:.75}
+.done .cfall a{border-bottom:1px solid}

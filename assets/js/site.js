@@ -446,6 +446,7 @@
   // Contact form: validates, then prepares the message for email
   var form=$('#cform');
   if(form){
+    form.addEventListener('change',function(e){var ph=e.target.getAttribute&&e.target.getAttribute('data-ph');if(ph&&form.elements.fmsg)form.elements.fmsg.placeholder=ph});
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var err=$('#cerr'); err.textContent='';
@@ -455,6 +456,7 @@
       var body='الاسم: '+name+'\nالجوال: '+(phone||'-')+'\nالبريد: '+(email||'-')+'\nالموضوع: '+topic+'\n\n'+msg;
       var href='mailto:PR@unicorn.com.sa?subject='+encodeURIComponent('['+topic+'] من '+name)+'&body='+encodeURIComponent(body);
       var d=$('#cdone'); d.hidden=false;
+      var ex=$('#cextra'); if(ex) ex.hidden=topic.indexOf('استشارة')<0;
       $('#cmail').setAttribute('href',href);
       try{window.location.href=href}catch(x){}
     });
