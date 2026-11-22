@@ -20,7 +20,7 @@
 <meta name="twitter:site" content="@unicorn_1sa">
 <link rel="alternate" type="text/markdown" title="llms.txt" href="https://sihamsaleh.github.io/unicorn-site/llms.txt">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": ["Organization", "ProfessionalService"], "@id": "https://sihamsaleh.github.io/unicorn-site/#org", "name": "مجموعة يونيكورن للاستشارات والاستثمارات", "alternateName": ["Unicorn Group", "يونيكورن"], "url": "https://sihamsaleh.github.io/unicorn-site/", "logo": "https://sihamsaleh.github.io/unicorn-site/assets/img/logo-white.png", "image": "https://sihamsaleh.github.io/unicorn-site/assets/img/hero-1.jpg", "description": "جهة سعودية مقرّها المدينة المنورة متخصصة في سوق المدينة العقاري: تقارير أسبوعية وشهرية، واستشارات مالية واستراتيجية، واستشارات التطوير العقاري، والتقييم الصناعي", "email": "PR@unicorn.com.sa", "address": {"@type": "PostalAddress", "streetAddress": "8991 هانئ بن سعيد النخعي، المذينب", "addressLocality": "المدينة المنورة", "postalCode": "42381", "addressCountry": "SA"}, "areaServed": {"@type": "City", "name": "المدينة المنورة"}, "knowsAbout": ["سوق المدينة المنورة العقاري", "الاستشارات المالية", "دراسات الجدوى", "التطوير العقاري", "التقييم الصناعي"], "contactPoint": [{"@type": "ContactPoint", "contactType": "العلاقات العامة", "email": "PR@unicorn.com.sa"}], "sameAs": ["https://www.linkedin.com/company/unicorn-ksa", "https://x.com/unicorn_1sa"]}, {"@type": "WebPage", "@id": "https://sihamsaleh.github.io/unicorn-site/contact.html", "url": "https://sihamsaleh.github.io/unicorn-site/contact.html", "name": "تواصل معنا | مجموعة يونيكورن", "description": "تواصل مع مجموعة يونيكورن في المدينة المنورة", "inLanguage": "ar", "isPartOf": {"@id": "https://sihamsaleh.github.io/unicorn-site/#site"}, "about": {"@id": "https://sihamsaleh.github.io/unicorn-site/#org"}}]}</script>
-<link rel="stylesheet" href="assets/css/site.css?v=20261122220052">
+<link rel="stylesheet" href="assets/css/site.css?v=20261122232804">
 </head>
 <body>
 <header class="hdr" id="hdr">
@@ -59,13 +59,17 @@
           <div class="topics" role="radiogroup" aria-labelledby="tl">
             <label><input type="radio" name="topic" id="t1" value="طلب استشارة مجانية" data-ph="ما الموضوع الذي تودّ مناقشته؟ أخبرنا عن أهدافك وأبرز أسئلتك." checked=""><span>طلب استشارة مجانية</span></label>
             <label><input type="radio" name="topic" id="t2" value="مناقشة فرصة استثمارية" data-ph="شاركنا وصفًا مختصرًا للفرصة، والقطاع، ومرحلتها الحالية، ونوع التعاون المطلوب."><span>مناقشة فرصة استثمارية</span></label>
-            <label><input type="radio" name="topic" id="t3" value="عرض موقع استثماري" data-ph="اذكر موقع العقار، ونوعه، ومساحته، وما ترغب في مناقشته بشأنه."><span>عرض موقع استثماري</span></label>
+            <label><input type="radio" name="topic" id="t3" value="عرض موقع استثماري" data-ph="اذكر نوع العقار، وما ترغب في مناقشته بشأنه."><span>عرض موقع استثماري</span></label>
             <label><input type="radio" name="topic" id="t4" value="طلب دراسة أو تقرير" data-ph="حدّد موضوع الدراسة أو التقرير، والغرض منه، وأي تفاصيل تساعدنا على فهم طلبك."><span>طلب دراسة أو تقرير</span></label>
           </div>
         </div>
         <label>الاسم<input id="fname" name="fname" autocomplete="name" required=""></label>
         <label>رقم الجوال<input id="fphone" name="fphone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="05xxxxxxxx"></label>
         <label class="full">البريد الإلكتروني<input id="femail" name="femail" type="email" autocomplete="email" dir="ltr"></label>
+        <div class="full site-only" id="sitef">
+          <label class="site-map">رابط الموقع على خرائط قوقل<input id="fmap" name="fmap" type="url" inputmode="url" dir="ltr" placeholder="https://maps.app.goo.gl/..."></label>
+          <label class="site-area">مساحة الموقع (م²)<input id="farea" name="farea" inputmode="decimal" dir="ltr" placeholder="مثال: 2500"></label>
+        </div>
         <label class="full">تفاصيل طلبك<textarea id="fmsg" name="fmsg" required="" placeholder="ما الموضوع الذي تودّ مناقشته؟ أخبرنا عن أهدافك وأبرز أسئلتك."></textarea></label>
         <p class="err full" id="cerr" role="alert"></p>
         <button type="submit" class="btn">أرسل الرسالة</button>
@@ -94,5 +98,5 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=20261122215910"></script>
+<script src="assets/js/site.js?v=20261122232804"></script>
 </body></html>

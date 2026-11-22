@@ -1799,3 +1799,9 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 
 /* phones: stop the page from sliding sideways (iOS ignores overflow-x on body alone) */
 html,body{overflow-x:clip}
+
+/* ===== Contact: investment-site fields (map link + area) ===== */
+.form .site-only{display:none;grid-template-columns:2fr 1fr;gap:16px}
+.form:has(#t3:checked) .site-only{display:grid}
+.form .site-only .site-hint{grid-column:1/-1;margin:-6px 0 0;font-size:13px;opacity:.7}
+@media(max-width:600px){.form .site-only{grid-template-columns:1fr}}

@@ -453,7 +453,14 @@
       var el=form.elements, name=el.fname.value.trim(), phone=el.fphone.value.trim(), email=el.femail.value.trim(), msg=el.fmsg.value.trim();
       var topic=(form.querySelector('input[name=topic]:checked')||{}).value||'استفسار عام';
       if(!name||(!phone&&!email)||!msg){err.textContent='أكمل الاسم ووسيلة تواصل واحدة على الأقل (الجوال أو البريد) ونص الرسالة';return}
-      var body='الاسم: '+name+'\nالجوال: '+(phone||'-')+'\nالبريد: '+(email||'-')+'\nالموضوع: '+topic+'\n\n'+msg;
+      var site='';
+      if(el.fmap&&topic==='عرض موقع استثماري'){
+        var map=el.fmap.value.trim(), area=el.farea.value.trim();
+        if(!map||!area){err.textContent='أضف رابط الموقع على خرائط قوقل ومساحته';return}
+        if(!/^https?:\/\/([\w-]+\.)*(google\.[a-z.]+|goo\.gl)\//i.test(map)){err.textContent='الصق رابط الموقع من خرائط قوقل';return}
+        site='\nرابط الموقع: '+map+'\nالمساحة: '+area+' م²';
+      }
+      var body='الاسم: '+name+'\nالجوال: '+(phone||'-')+'\nالبريد: '+(email||'-')+'\nالموضوع: '+topic+site+'\n\n'+msg;
       var href='mailto:PR@unicorn.com.sa?subject='+encodeURIComponent('['+topic+'] من '+name)+'&body='+encodeURIComponent(body);
       var d=$('#cdone'); d.hidden=false;
       var ex=$('#cextra'); if(ex) ex.hidden=topic.indexOf('استشارة')<0;
