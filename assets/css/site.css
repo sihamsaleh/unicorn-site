@@ -1793,3 +1793,6 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 
 /* phone hero: a sharp portrait crop of the original photo */
 @media (max-width:760px){.home .hero picture img{object-position:50% 50%}}
+
+/* phone browser bars match the new sharp hero crop: sky on top (the bottom strip colour is set in site.js) */
+@media (max-width:760px){.home .hero{background-color:#8f96cd}}

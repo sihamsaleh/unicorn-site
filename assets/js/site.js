@@ -381,7 +381,7 @@
     var e=document.createElement('div');e.className='edge-b';e.setAttribute('aria-hidden','true');document.body.appendChild(e);
     var upd=function(){
       var H=window.innerHeight,c='';
-      if(h&&window.scrollY<H*.5)c='#4b4163';
+      if(h&&window.scrollY<H*.5)c='#827188';
       else if(ft&&ft.getBoundingClientRect().top<H-20)c='#1a1d3a';
       document.body.classList.toggle('at-edge',!!c);if(c)e.style.background=c;
     };
