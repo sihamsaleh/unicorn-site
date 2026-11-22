@@ -1489,7 +1489,7 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 .art-no{font-family:var(--latin);font-size:13px;letter-spacing:.14em;color:var(--brand)}
 .art-sectors{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(24px,3vw,48px)}
 .art-sectors li{display:flex;flex-direction:column;gap:8px;padding-block:22px;border-top:1px solid #e1e5f2}
-.art-sectors li:last-child{grid-column:1/-1}
+.art-sectors li:last-child:nth-child(odd){grid-column:1/-1}
 .art-sectors h3{display:flex;align-items:center;gap:12px}
 .art-sectors h3::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--brand);flex:none}
 .art-sectors p{font-size:15.5px;padding-inline-start:22px}
