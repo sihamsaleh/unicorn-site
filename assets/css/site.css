@@ -1781,3 +1781,6 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 @keyframes lypPulse{from{transform:scale(.4);opacity:1}to{transform:scale(2.2);opacity:0}}
 @media(max-width:800px){.lyp{grid-template-columns:1fr}.lyp-pl{justify-self:center;max-width:240px;order:-1}.lyp ol{grid-template-columns:1fr}.lyp li+li{border-inline-start:0;padding-inline-start:0;border-top:1px solid rgba(255,255,255,.16)}}
 @media(prefers-reduced-motion:reduce){.lyp-pl .lyp-hot,.lyp-pl .lyp-ring{animation:none}}
+
+/* Contact on phones: heading, then the form, then the contact details */
+@media(max-width:900px){.cphero .c-info{display:contents}.cphero .cg-head{order:-1}.cphero #cform{order:0}.cphero .c-info>div:not(.cg-head){order:1}.cg-grid{gap:26px}.cphero .cg-head+*{margin-top:0}}
