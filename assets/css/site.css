@@ -1796,3 +1796,6 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 
 /* phone browser bars match the new sharp hero crop: sky on top (the bottom strip colour is set in site.js) */
 @media (max-width:760px){.home .hero{background-color:#8f96cd}}
+
+/* phones: stop the page from sliding sideways (iOS ignores overflow-x on body alone) */
+html,body{overflow-x:clip}
