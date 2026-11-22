@@ -462,3 +462,15 @@
     });
   }
 })();
+
+/* Services, stacked cards on phones: a card's text fades as the next card slides over it */
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('.sv1-card'));if(cards.length<2)return;
+  var mq=matchMedia('(max-width:760px)'),raf=0;
+  function upd(){raf=0;
+    if(!mq.matches){cards.forEach(function(c){c.style.removeProperty('--cv')});return}
+    for(var i=0;i<cards.length-1;i++){var a=cards[i].getBoundingClientRect(),b=cards[i+1].getBoundingClientRect();
+      var f=(a.bottom-b.top)/(a.height*.35);f=f<0?0:f>1?1:f;cards[i].style.setProperty('--cv',f.toFixed(3))}}
+  function req(){if(!raf)raf=requestAnimationFrame(upd)}
+  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);req();
+})();

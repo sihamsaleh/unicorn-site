@@ -1787,3 +1787,9 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 
 /* phone hero: photo raised a little so the dome clears the tagline, tagline lowered a little */
 @media (max-width:760px){.home .hero picture img,.home .hero .hero-vid{scale:1.22;transform:translateY(-7%)}.home .hero-cap{bottom:max(18px,env(safe-area-inset-bottom,0px))}}
+
+/* Services on phones: text of a covered card fades out (driven by --cv from site.js) */
+@media(max-width:760px){.sv1-card>*{opacity:calc(1 - var(--cv,0))}}
+
+/* phone hero: a sharp portrait crop of the original photo */
+@media (max-width:760px){.home .hero picture img{object-position:50% 50%}}
