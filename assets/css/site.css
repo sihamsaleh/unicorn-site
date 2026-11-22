@@ -1784,3 +1784,6 @@ main:has(> .strip:last-child) + .bwf .bwf-rule{display:none}
 
 /* Contact on phones: heading, then the form, then the contact details */
 @media(max-width:900px){.cphero .c-info{display:contents}.cphero .cg-head{order:-1}.cphero #cform{order:0}.cphero .c-info>div:not(.cg-head){order:1}.cg-grid{gap:26px}.cphero .cg-head+*{margin-top:0}}
+
+/* phone hero: photo raised a little so the dome clears the tagline, tagline lowered a little */
+@media (max-width:760px){.home .hero picture img,.home .hero .hero-vid{scale:1.22;transform:translateY(-7%)}.home .hero-cap{bottom:max(18px,env(safe-area-inset-bottom,0px))}}
