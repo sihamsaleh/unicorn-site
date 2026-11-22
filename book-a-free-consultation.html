@@ -107,6 +107,7 @@
 
 /* method tiles */
 .q-tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.q-tiles.one{grid-template-columns:1fr}
 .q-tiles span{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--q-rf);border:1.5px solid var(--q-bd);background:var(--q-card);cursor:pointer;transition:.2s;font-size:15px;font-weight:700;font-family:var(--head)}
 .q-tiles .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--q-field);flex:none;transition:.2s;padding:0;border:0}
 .q-tiles svg{width:21px;height:21px;fill:none;stroke:var(--q-acc);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
@@ -292,6 +293,7 @@
         <div class="q-row"><div data-f="name"></div><div data-f="phone"></div></div>
         <div data-f="email"></div>
         <div data-f="role"></div>
+        <div data-f="sit"></div>
         <div data-f="size"></div>
         <div data-f="when"></div>
         <hr class="q-hr">
@@ -329,6 +331,7 @@
         </div>
         <div class="q-step" data-step="2" hidden="">
           <h3>اهتمامك الاستثماري</h3>
+          <div data-f="sit"></div>
           <div data-f="size"></div>
           <div data-f="how"></div>
           <div data-f="need"></div>
@@ -414,8 +417,8 @@
 <script data-ed-park>
 const OPT={
   role:['فرد','شركة','مكتب عائلي','شركة استثمارية'],
-  size:['أقل من مليون ريال','من ١ إلى ١٠ ملايين','من ١٠ إلى ١٠٠ مليون','أكثر من ١٠٠ مليون'],
-  when:['خلال ٣ أشهر','من ٣ إلى ٦ أشهر','من ٦ إلى ١٢ شهرًا','بعد أكثر من سنة'],
+  size:['أقل من مليون ريال','من مليون إلى ١٠ ملايين','من ١٠ إلى ١٠٠ مليون','أكثر من ١٠٠ مليون'],
+  when:['خلال ٣ أشهر','من ٣ إلى ٦ أشهر','من ٦ إلى ١٢ شهرًا','لم أحدد بعد'],
   how:['الدخول في فرصة قائمة','الدخول شريكًا','تطوير فرصة جديدة','لم أحدد بعد'],
   need:['دراسة جدوى','تقييم فرصة','استقطاب شركاء','هيكلة الاستثمار'],
   ready:['جاهز للتنفيذ','أحتاج دراسة قبل القرار','أستكشف الخيارات']
@@ -442,20 +445,20 @@ function pills(k){const n='g'+(++uid);return `<div class="q-f"><span class="q-lb
 function text(lb,type,req,ic,extra=''){const id='i'+(++uid);return `<div class="q-f${req?' req':''}"><label class="q-lb" for="${id}">${lb}${req?'<i>*</i>':''}</label><div class="q-in-wrap">${svg(ICON[ic])}<input id="${id}" type="${type}" ${extra}${req?' required':''}></div><span class="q-er">هذا الحقل مطلوب</span></div>`}
 const F={
   name:()=>text('الاسم الكامل','text',1,'user','autocomplete="name"'),
-  phone:()=>text('رقم الجوال','tel',1,'phone','inputmode="tel" autocomplete="tel" dir="ltr" placeholder="05xxxxxxxx"'),
-  email:()=>text('البريد الإلكتروني','email',0,'mail','autocomplete="email" dir="ltr" placeholder="name@example.com"'),
+  phone:()=>text('رقم الجوال','tel',0,'phone','inputmode="tel" autocomplete="tel" dir="ltr" placeholder="05xxxxxxxx"'),
+  email:()=>text('البريد الإلكتروني','email',1,'mail','autocomplete="email" dir="ltr" placeholder="name@example.com"'),
   activity:()=>text('نشاطك الحالي','text',0,'brief',''),
   notes:()=>{const id='i'+(++uid);return `<div class="q-f"><label class="q-lb" for="${id}">ملاحظات إضافية<small>(اختياري)</small></label><textarea id="${id}"></textarea></div>`},
+  sit:()=>{const n='g'+(++uid);return `<div class="q-f"><span class="q-lb">أين أنت الآن؟</span><div class="q-pills grid" role="radiogroup">${SIT.map(([t])=>`<label><input type="radio" name="${n}" value="${t}"><span>${t}</span></label>`).join('')}</div></div>`},
   role:()=>pills('role'),size:()=>pills('size'),when:()=>pills('when'),how:()=>pills('how'),need:()=>pills('need'),ready:()=>pills('ready'),
-  method:()=>{const n='g'+(++uid);return `<div class="q-f"><span class="q-lb">طريقة الجلسة</span><div class="q-tiles" role="radiogroup" data-method>
-    <label><input type="radio" name="${n}" value="اتصال هاتفي"><span><span class="ic">${svg(ICON.phone)}</span>اتصال هاتفي<i class="dot"></i></span></label>
-    <label><input type="radio" name="${n}" value="اجتماع مرئي"><span><span class="ic">${svg(ICON.video)}</span>اجتماع مرئي<i class="dot"></i></span></label>
+  method:()=>{const n='g'+(++uid);return `<div class="q-f"><span class="q-lb">طريقة الجلسة</span><div class="q-tiles one" role="radiogroup" data-method>
+    <label><input type="radio" name="${n}" value="اجتماع مرئي عبر Zoom" checked><span><span class="ic">${svg(ICON.video)}</span>اجتماع مرئي عبر Zoom<i class="dot"></i></span></label>
   </div></div>`},
   cal:()=>`<div class="q-f"><span class="q-lb">اختيار الموعد</span><div class="q-cal" data-cal></div></div>`
 };
 document.querySelectorAll('[data-f]').forEach(el=>{el.outerHTML=F[el.dataset.f]()});
 document.querySelectorAll('[data-big]').forEach(el=>{const n='g'+(++uid);el.innerHTML=SIT.map(([t,p])=>`<label><input type="radio" name="${n}" value="${t}"><span><span class="ic">${svg(p)}</span>${t}<i class="ck">${svg('<path d="M5 12.5l4.5 4.5L19 7.5"/>')}</i></span></label>`).join('')});
-document.querySelectorAll('[data-sum]').forEach(el=>{el.className='q-sum';el.innerHTML=`<b>ملخص موعدك</b><div data-s-m>${svg(ICON.phone)}<span>طريقة الجلسة</span></div><div data-s-c>${svg(ICON.cal)}<span>الموعد</span></div>`});
+document.querySelectorAll('[data-sum]').forEach(el=>{el.className='q-sum';el.innerHTML=`<b>ملخص موعدك</b><div data-s-m>${svg(ICON.video)}<span class="on">اجتماع مرئي عبر Zoom</span></div><div data-s-c>${svg(ICON.cal)}<span>الموعد</span></div>`});
 
 /* calendar (visual only) */
 const DAYN=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
@@ -487,14 +490,14 @@ document.querySelectorAll('[data-cal]').forEach(cal=>{
 document.querySelectorAll('[data-method]').forEach(m=>m.addEventListener('change',e=>{
   const s=sumOf(m)?.querySelector('[data-s-m]');if(!s)return;const v=e.target.value;
   s.querySelector('span').textContent=v;s.querySelector('span').classList.add('on');
-  s.querySelector('svg').innerHTML=v==='اجتماع مرئي'?ICON.video:ICON.phone}));
+  s.querySelector('svg').innerHTML=ICON.video}));
 
 /* validation + submit */
 function check(scope){let first=null;scope.querySelectorAll('.q-f.req').forEach(f=>{const i=f.querySelector('input');const bad=!i.value.trim();f.classList.toggle('bad',bad);if(bad&&!first)first=i});if(first)first.focus();return !first}
 document.addEventListener('input',e=>{const f=e.target.closest('.q-f.bad');if(f&&e.target.value.trim())f.classList.remove('bad')});
 const toast=document.getElementById('toast');let tt;
 function success(form){toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),5000);form.reset();form.querySelectorAll('[data-cal]').forEach(c=>c.reset());
-  const s=sumOf(form);if(s){const m=s.querySelector('[data-s-m]');m.querySelector('span').textContent='طريقة الجلسة';m.querySelector('span').classList.remove('on');m.querySelector('svg').innerHTML=ICON.phone}
+  const s=sumOf(form);if(s){const m=s.querySelector('[data-s-m]');m.querySelector('span').textContent='اجتماع مرئي عبر Zoom';m.querySelector('span').classList.add('on');m.querySelector('svg').innerHTML=ICON.video}
   if(form.goto)form.goto(1)}
 document.querySelectorAll('[data-form]').forEach(form=>{
   const steps=form.hasAttribute('data-steps');let cur=1;
