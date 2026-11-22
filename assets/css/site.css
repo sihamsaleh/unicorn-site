@@ -1159,7 +1159,6 @@ body.menu .mnav .btn{animation-delay:.44s}
 .pt-row{overflow:hidden;padding-block:8px;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
 .pt-track{display:flex;gap:clamp(14px,1.6vw,22px);width:max-content;animation:ptMove 40s linear infinite}
 .pt-rev .pt-track{animation-direction:reverse;animation-duration:46s}
-.pt-row:hover .pt-track{animation-play-state:paused}
 .pt-logo{flex:none;width:clamp(150px,13vw,190px);height:clamp(86px,7.4vw,108px);background:#fff;border-radius:18px;border:1px solid #ececf4;box-shadow:0 12px 26px -20px rgba(14,18,51,.35);display:grid;place-items:center;padding:12px}
 .pt-logo img{max-width:100%;max-height:clamp(56px,4.9vw,74px);width:auto;height:auto;object-fit:contain}
 @keyframes ptMove{to{transform:translateX(33.333%)}}
