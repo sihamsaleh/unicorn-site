@@ -20,7 +20,7 @@
 <meta name="twitter:site" content="@unicorn_1sa">
 <link rel="alternate" type="text/markdown" title="llms.txt" href="https://sihamsaleh.github.io/unicorn-site/llms.txt">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": ["Organization", "ProfessionalService"], "@id": "https://sihamsaleh.github.io/unicorn-site/#org", "name": "مجموعة يونيكورن للاستشارات والاستثمارات", "alternateName": ["Unicorn Group", "يونيكورن"], "url": "https://sihamsaleh.github.io/unicorn-site/", "logo": "https://sihamsaleh.github.io/unicorn-site/assets/img/logo-white.png", "image": "https://sihamsaleh.github.io/unicorn-site/assets/img/hero-1.jpg", "description": "جهة سعودية مقرّها المدينة المنورة متخصصة في سوق المدينة العقاري: تقارير أسبوعية وشهرية، واستشارات مالية واستراتيجية، واستشارات التطوير العقاري، والتقييم الصناعي", "email": "PR@unicorn.com.sa", "address": {"@type": "PostalAddress", "streetAddress": "8991 هانئ بن سعيد النخعي، المذينب", "addressLocality": "المدينة المنورة", "postalCode": "42381", "addressCountry": "SA"}, "areaServed": {"@type": "City", "name": "المدينة المنورة"}, "knowsAbout": ["سوق المدينة المنورة العقاري", "الاستشارات المالية", "دراسات الجدوى", "التطوير العقاري", "التقييم الصناعي"], "contactPoint": [{"@type": "ContactPoint", "contactType": "العلاقات العامة", "email": "PR@unicorn.com.sa"}], "sameAs": ["https://www.linkedin.com/company/unicorn-ksa", "https://x.com/unicorn_1sa"]}, {"@type": "WebPage", "@id": "https://sihamsaleh.github.io/unicorn-site/find-opportunity.html", "url": "https://sihamsaleh.github.io/unicorn-site/find-opportunity.html", "name": "ابحث عن فرصة | مجموعة يونيكورن", "description": "أخبرنا أين أنت الآن، وسنساعدك في إيجاد الفرصة الاستثمارية المناسبة في المدينة المنورة", "inLanguage": "ar", "isPartOf": {"@id": "https://sihamsaleh.github.io/unicorn-site/#site"}, "about": {"@id": "https://sihamsaleh.github.io/unicorn-site/#org"}}]}</script>
-<link rel="stylesheet" href="assets/css/site.css?v=20261122220052">
+<link rel="stylesheet" href="assets/css/site.css?v=20261123emil3">
 <style>
 /* ================= tokens per look ================= */
 .d-stage{width:100%;container-type:inline-size;
@@ -253,6 +253,26 @@
 .q-tabs button:focus-visible{outline:2px solid var(--q-acc);outline-offset:2px}
 @container (max-width:420px){.q-tabs button{padding:9px 14px;font-size:14px}}
 .d-stage .q-sec{padding-top:clamp(28px,4cqw,56px)}
+/* Emil motion pass (form pages): press feedback, exact properties, snappier curves */
+.q-pills span,.q-tiles span,.q-big>label>span,.q-cal-top .nv button,.q-days button,.q-slots button,.q-btn,.q-tabs button,.q-qa summary{-webkit-tap-highlight-color:transparent}
+.q-pills span{transition:border-color .18s ease,background .18s ease,color .18s ease,transform .14s var(--ease-out)}
+.q-tiles span,.q-tiles .ic,.q-tiles .dot{transition:border-color .18s ease,background .18s ease,color .18s ease,box-shadow .18s ease,transform .14s var(--ease-out)}
+.q-big>label>span{transition:border-color .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease,translate .2s var(--ease-out),transform .14s var(--ease-out)}
+.q-big .ic,.q-big .ck{transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s var(--ease-out)}
+.q-cal-top .nv button,.q-days button,.q-slots button{transition:border-color .18s ease,background .18s ease,color .18s ease,transform .14s var(--ease-out)}
+.q-btn{transition:background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease,translate .2s var(--ease-out),transform .16s var(--ease-out)}
+.q-btn svg{transition:translate .2s var(--ease-out)}
+.q-tabs button{transition:background .2s ease,color .2s ease,transform .16s var(--ease-out)}
+.q-pills input+span:active,.q-tiles input+span:active,.q-big>label>span:active{transform:scale(.97)}
+.q-days button:active:not(:disabled),.q-slots button:active:not(:disabled),.q-cal-top .nv button:active:not(:disabled){transform:scale(.94)}
+.q-btn:active,.q-tabs button:active{transform:scale(.97)}
+.q-steps .n,.q-steps .t{transition:background .25s ease,color .25s ease,border-color .25s ease}
+.q-steps .ln i{transition:transform .35s var(--ease-out)}
+.q-step{animation:qin .3s var(--ease-out)}
+.q-toast{transition:translate .3s var(--ease-out),opacity .2s ease}
+.q-toast:not(.on){transition:translate .2s ease,opacity .15s ease}
+.q-ch,.q-ch::after{transition:transform .22s var(--ease-out),background .2s ease,border-color .2s ease}
+@media (hover:none){.q-big>label>span:hover,.q-btn.pri:hover{translate:none}.q-btn:hover svg{translate:none}}
 </style>
 </head>
 <body>
@@ -448,5 +468,5 @@ if(tb)tb.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)r
   document.getElementById('stage').scrollIntoView({behavior:'smooth',block:'start'})});
 </script>
 <script>(function(){var h=document.getElementById('hdr');function f(){document.documentElement.style.setProperty('--hdr-h',h.offsetHeight+'px')}f();addEventListener('resize',f)})()</script>
-<script src="assets/js/site.js?v=20261122215910"></script>
+<script src="assets/js/site.js?v=20261123emil3"></script>
 </body></html>
