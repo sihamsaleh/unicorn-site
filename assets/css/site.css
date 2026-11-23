@@ -1825,7 +1825,7 @@ main[tabindex="-1"]:focus{outline:none}
     border-radius:999px;padding:8px;padding-inline-start:22px;text-decoration:none;color:#fff;
     background:linear-gradient(135deg,#252a5a,#191c3b);box-shadow:0 26px 50px -34px rgba(10,12,40,.7)}
   #consult-strip .cs-m::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:1;
-    background:conic-gradient(from var(--csh),transparent 0 66%,rgba(214,184,124,.95) 78%,transparent 90%);
+    background:conic-gradient(from var(--csh),transparent 0 66%,rgba(255,255,255,.95) 78%,transparent 90%);
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
     mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:csRun 6s linear infinite}
   #consult-strip .cs-m h2{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(14px,4.2vw,16px);line-height:1.4;white-space:nowrap;color:#fff}
