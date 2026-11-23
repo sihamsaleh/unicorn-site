@@ -1812,3 +1812,25 @@ html,body{overflow-x:clip}
 .skip:focus{top:calc(env(safe-area-inset-top,0px) + 12px);outline:2px solid #2156b3;outline-offset:2px}
 .bwf-link:focus-visible,.bwf-soc:focus-visible,.bwf-credits a:focus-visible,.bwf-go:focus-visible{outline:2px solid rgba(255,255,255,.9)!important;outline-offset:4px;border-radius:6px}
 main[tabindex="-1"]:focus{outline:none}
+
+/* ===== Home capsule on phones: slim one-line pill, the whole pill is the link ===== */
+@property --csh{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes csRun{to{--csh:360deg}}
+@keyframes csNudge{0%,60%,100%{transform:translateX(0)}30%{transform:translateX(-4px)}}
+#consult-strip .cs-m{display:none}
+@media (max-width:760px){
+  #consult-strip .wrap{display:none}
+  #consult-strip{padding-inline:max(16px,env(safe-area-inset-left,0px))}
+  #consult-strip .cs-m{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:space-between;gap:10px;
+    border-radius:999px;padding:8px;padding-inline-start:22px;text-decoration:none;color:#fff;
+    background:linear-gradient(135deg,#252a5a,#191c3b);box-shadow:0 26px 50px -34px rgba(10,12,40,.7)}
+  #consult-strip .cs-m::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:1;
+    background:conic-gradient(from var(--csh),transparent 0 66%,rgba(214,184,124,.95) 78%,transparent 90%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+    mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:csRun 6s linear infinite}
+  #consult-strip .cs-m h2{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(14px,4.2vw,16px);line-height:1.4;white-space:nowrap;color:#fff}
+  #consult-strip .cs-r{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#e3c993;
+    background:rgba(227,201,147,.12);border:1px solid rgba(227,201,147,.45)}
+  #consult-strip .cs-r svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;animation:csNudge 2.8s cubic-bezier(.45,0,.25,1) infinite}
+}
+@media (max-width:760px) and (prefers-reduced-motion:reduce){#consult-strip .cs-m::before,#consult-strip .cs-r svg{animation:none}}
