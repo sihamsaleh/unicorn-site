@@ -74,11 +74,11 @@
       if(!es[0].isIntersecting)return; ko.disconnect();
       requestAnimationFrame(function(){kp.classList.add('k-go')});
       nums.forEach(function(n,idx){
-        var to=parseFloat(n.dataset.to),dec=(n.dataset.to.split('.')[1]||'').length,dur=1200,t0=null;
+        var to=parseFloat(n.dataset.to),dec=(n.dataset.to.split('.')[1]||'').length,dur=3200,t0=null;
         setTimeout(function(){requestAnimationFrame(function step(t){
           if(!t0)t0=t; var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,4);
           n.textContent=(to*e).toFixed(dec); if(p<1)requestAnimationFrame(step); else n.textContent=n.dataset.to;
-        })},200+idx*70);
+        })},1000+idx*240);
       });
     },{threshold:.25});
     ko.observe(kp);
@@ -392,14 +392,9 @@
   var hc=document.body.classList.contains('home')?$('.hero'):null;
   if(hc && !matchMedia('(prefers-reduced-motion: reduce)').matches){
     // once the hero is fully covered it is hidden, so Chrome can never paint it through the sections below
-    // one update per frame; the hero height is measured on resize only, never inside the scroll handler
-    var hcH=hc.offsetHeight,vh=window.innerHeight,hcRaf=0,hcLast=-1;
-    var hcUpd=function(){hcRaf=0;var y=window.scrollY,p=Math.max(0,Math.min(1,y/vh)),v=p.toFixed(3);
-      if(v!==hcLast){hcLast=v;hc.style.setProperty('--hp',v)}
-      var hide=y>hcH+2;if(hide!==(hc.style.visibility==='hidden'))hc.style.visibility=hide?'hidden':''};
-    var hcReq=function(){if(!hcRaf)hcRaf=requestAnimationFrame(hcUpd)};
-    window.addEventListener('scroll',hcReq,{passive:true});
-    window.addEventListener('resize',function(){hcH=hc.offsetHeight;vh=window.innerHeight;hcReq()});hcUpd();
+    var hcUpd=function(){var p=Math.max(0,Math.min(1,window.scrollY/window.innerHeight));hc.style.setProperty('--hp',p.toFixed(3));
+      hc.style.visibility=window.scrollY>hc.offsetHeight+2?'hidden':''};
+    window.addEventListener('scroll',hcUpd,{passive:true});hcUpd();
   }
 
   // Parallax on the wide image (home)

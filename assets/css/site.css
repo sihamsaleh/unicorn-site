@@ -1106,17 +1106,35 @@ body.menu .mnav .btn{animation-delay:.44s}
   body.at-hero .edge-b{display:block;position:fixed;left:0;right:0;bottom:0;height:10px;background:#4b4163;z-index:1;pointer-events:none}
 }
 
-/* phone hero: one quick entrance — logo, then the title right behind it; the photo stays still and only glides with the phone's tilt */
-@keyframes heroRise{from{opacity:0;transform:translateY(14px);filter:blur(4px)}to{opacity:1;transform:none;filter:blur(0)}}
+/* phone hero: smoother tilt (the script eases it) and one slow, flowing entrance: logo first, the title follows as the logo settles */
+@keyframes heroRise{from{opacity:0;transform:translateY(22px);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
 @media (max-width:760px){
   .hero picture img{transition:none}
-  .hero picture img,.hero.drift picture img{animation:none}
-  .hero-mobile-title .logo{animation:heroRise .7s .1s var(--ease-out) both}
-  .hero-cap .shiny .w{animation:heroRise .7s var(--ease-out) both;animation-delay:.3s}
-  .hero-cap .shiny .w:nth-of-type(n+3){animation-delay:.38s}
-  .band .intro h1{font-size:clamp(33px,9.2vw,38px);line-height:1.4}
+  .hero.drift picture img{animation:heroZoom 14s ease-out both,heroDrift 24s ease-in-out 2s infinite alternate}
+  .hero-mobile-title .logo{animation:heroRise 2.2s .5s cubic-bezier(.22,1,.36,1) both}
+  .hero-cap .shiny .w{animation:heroRise 2.2s cubic-bezier(.22,1,.36,1) both;animation-delay:1.5s}
+  .hero-cap .shiny .w:nth-of-type(n+3){animation-delay:1.9s}
 }
 @media (max-width:760px) and (prefers-reduced-motion:reduce){.hero-mobile-title .logo,.hero-cap .shiny .w{animation:none}}
+/* phone hero, final timing: logo in at a medium pace, the title straight after it; the photo stays still and only glides with the phone's tilt */
+@media (max-width:760px){
+  .hero picture img,.hero.drift picture img{animation:none}
+  .hero-mobile-title .logo{animation:heroRise 1.3s .3s cubic-bezier(.22,1,.36,1) both}
+  .hero-cap .shiny .w{animation:heroRise 1.3s cubic-bezier(.22,1,.36,1) both;animation-delay:1.45s}
+  .hero-cap .shiny .w:nth-of-type(n+3){animation-delay:1.7s}
+}
+@media (max-width:760px) and (prefers-reduced-motion:reduce){.hero-mobile-title .logo,.hero-cap .shiny .w{animation:none}}
+/* phone hero logo: option 8, it rises like the title so both read as one motion */
+@media (max-width:760px){.hero-mobile-title .logo{animation:heroRise 1.3s .2s cubic-bezier(.22,1,.36,1) both}}
+@media (max-width:760px) and (prefers-reduced-motion:reduce){.hero-mobile-title .logo{animation:none}}
+/* phone: the intro heading a little bigger */
+@media (max-width:760px){.band .intro h1{font-size:clamp(33px,9.2vw,38px);line-height:1.4}}
+/* phone hero title: starts right as the logo settles, and comes in slowly and calmly */
+@media (max-width:760px){
+  .hero-cap .shiny .w{animation:heroRise 2.2s cubic-bezier(.25,.8,.3,1) both;animation-delay:.9s}
+  .hero-cap .shiny .w:nth-of-type(n+3){animation-delay:1.2s}
+}
+@media (max-width:760px) and (prefers-reduced-motion:reduce){.hero-cap .shiny .w{animation:none}}
 
 /* phone browser bars: an opaque header so Safari tints the top bar with it, and the bottom strip shown on the hero and the footer */
 @media (max-width:760px){
@@ -1787,142 +1805,6 @@ html,body{overflow-x:clip}
 .form:has(#t3:checked) .site-only{display:grid}
 .form .site-only .site-hint{grid-column:1/-1;margin:-6px 0 0;font-size:13px;opacity:.7}
 @media(max-width:600px){.form .site-only{grid-template-columns:1fr}}
-
-/* ================= Emil motion pass: smooth, fast, responsive ================= */
-:root{--ease-out:cubic-bezier(.23,1,.32,1);--ease-in-out:cubic-bezier(.77,0,.175,1)}
-
-/* 1) Every pressable thing answers the finger: quick scale on press */
-.btn,.bwf-go,.lyp-b,.arcx-btn,.sv2-nav button,.arrows button,.social a,.c-social a,.copy,.tabs button,.form .topics span,.nav-more>button,.burger,.art-path,.pill{
-  -webkit-tap-highlight-color:transparent}
-.btn{transition:background .2s ease,color .2s ease,box-shadow .2s ease,transform .16s var(--ease-out)}
-.btn:active,.bwf-go:active,.lyp-b:active,.sv2-nav button:active,.social a:active,.c-social a:active,.copy:active,.tabs button:active,.nav-more>button:active,.burger:active{transform:scale(.97)}
-.arcx-btn:active{transform:scale(.95)}
-.form .topics input+span:active{transform:scale(.96)}
-.pill:active{transform:scale(.985)}
-.art-path:active{transform:scale(.98)}
-.bwf-go,.lyp-b{transition:transform .16s var(--ease-out),box-shadow .2s ease,background .2s ease}
-.arcx-btn{transition:transform .16s var(--ease-out),background .2s ease,color .2s ease}
-.sv2-nav button{transition:background .2s ease,color .2s ease,transform .16s var(--ease-out)}
-.social a,.c-social a{transition:background .2s ease,color .2s ease,border-color .2s ease,transform .16s var(--ease-out)}
-.copy,.tabs button{transition:background .2s ease,color .2s ease,border-color .2s ease,transform .16s var(--ease-out)}
-.form .topics span{transition:background .18s ease,color .18s ease,border-color .18s ease,transform .14s var(--ease-out)}
-.nav-more>button{transition:background .2s ease,transform .16s var(--ease-out)}
-.arrows button{transition:opacity .15s ease,transform .16s var(--ease-out)}
-.arrows button:active:not(:disabled){transform:scale(.92)}
-
-/* 2) Cards and pills: hover answers faster (was .4s) */
-.pill{transition:background .25s ease,color .25s ease,border-color .25s ease,transform .16s var(--ease-out)}
-.pill .pi,.pill .ps{transition:background .25s ease,color .25s ease}
-.pill .pc{transition:background .25s ease,color .25s ease,transform .3s var(--ease-out)}
-.art-path{transition:border-color .2s ease,box-shadow .25s ease,transform .25s var(--ease-out)}
-.art-path em i,.bwf-go::after,.lyp-b svg{transition:transform .25s var(--ease-out)}
-
-/* 3) Dropdown: opens with a strong ease-out from its trigger corner, closes faster */
-.dd ul{transform:translateY(6px) scale(.98);transform-origin:top right;
-  transition:opacity .15s ease,transform .15s var(--ease-out),visibility 0s linear .15s}
-.dd:hover ul,.dd.open ul,.dd:focus-within ul{transform:none;
-  transition:opacity .2s ease,transform .22s var(--ease-out),visibility 0s}
-.dd>button svg{transition:transform .22s var(--ease-out)}
-
-/* 4) Burger + phone menu: snappier, shorter stagger */
-.burger span{transition:top .25s var(--ease-out),transform .25s var(--ease-out)}
-.mnav{transition:opacity .25s var(--ease-out),visibility 0s linear .25s}
-body.menu .mnav{transition:opacity .3s var(--ease-out),visibility 0s}
-body.menu .mnav h5,body.menu .mnav a,body.menu .mnav .btn{animation:mUp .4s var(--ease-out) both}
-body.menu .mnav a:nth-of-type(1){animation-delay:.06s}body.menu .mnav a:nth-of-type(2){animation-delay:.1s}body.menu .mnav a:nth-of-type(3){animation-delay:.14s}body.menu .mnav a:nth-of-type(4){animation-delay:.18s}body.menu .mnav a:nth-of-type(5){animation-delay:.22s}
-body.menu .mnav .btn{animation-delay:.26s}
-
-/* 5) Report rows: slide content with transform instead of animating padding (no layout thrash) */
-.reports li a{transition:background .2s ease}
-.reports li a:hover{padding-inline-start:28px}
-.reports li a>*{transition:transform .25s var(--ease-out)}
-.reports li a:hover>*{transform:translateX(-8px)}
-
-/* 6) Underline under nav links: quicker */
-.navlink::after{transition:transform .25s var(--ease-out)}
-
-/* 7) Touch screens: no sticky hover lifts after a tap */
-@media (hover:none){
-  .btn:hover,.bwf-go:hover,.lyp-b:hover,.arcx-btn:hover,.art-path:hover{transform:none}
-  .pill:hover .pc{transform:none}
-  .reports li a:hover>*{transform:none}
-  .bwf-go:hover::after,.lyp-b:hover svg,.art-path:hover em i{transform:none}
-}
-@media (prefers-reduced-motion:reduce){.dd ul,.dd:hover ul,.dd.open ul{transform:none}}
-
-.nav-more ul{transform-origin:top left}
-
-/* ================= Emil motion pass 2: faster content, calmer page, lighter scrolling ================= */
-
-/* Shine: only the header "Contact us" runs constantly; every other shine wakes on hover */
-.btn::before,.svc-navy .flipc-f::before,.bwf-l6 .bwf-go::before,.strip .wrap::before{animation-play-state:paused}
-.hdr .btn::before{animation-play-state:running}
-@media (hover:hover) and (pointer:fine){
-  .btn:hover::before,.svc-navy .flipc:hover .flipc-f::before,.bwf-l6 .bwf-go:hover::before,.strip .wrap:hover::before{animation-play-state:running}
-}
-
-/* Header: one quick change when it turns solid (was .4s) */
-.hdr{transition:background .25s ease,box-shadow .25s ease,padding .25s var(--ease-out)}
-.logo,.hdr .logo{transition:background .25s ease,width .25s var(--ease-out),height .25s var(--ease-out),opacity .2s ease}
-
-/* Opportunity cards: open in ~half the time, text follows right away */
-.opps .card{transition:flex-grow .55s var(--ease-in-out),box-shadow .4s ease,opacity .4s ease,transform .4s var(--ease-out)}
-.opps .card img{transition:transform .9s var(--ease-out),filter .4s ease}
-.opps .card .body>*{transition:opacity .3s ease,transform .4s var(--ease-out)}
-.opps .card.on .body>*{transition-delay:.22s}
-.opps .card.on .body>*:nth-child(2){transition-delay:.27s}
-.opps .card.on .body>*:nth-child(3){transition-delay:.32s}
-.opps .card .more::after{transition:transform .25s var(--ease-out)}
-@media (max-width:760px){.opps .card{transition:height .5s var(--ease-in-out),box-shadow .4s ease}}
-@media (hover:hover){
-  .opps .card.on .body{transition:transform .4s var(--ease-out)}
-  .opps .card.on .body p,.opps .card.on .body .more{transition:max-height .4s var(--ease-out),opacity .25s ease,margin .4s var(--ease-out)!important}
-  .opps .card.on:hover .body p{transition-delay:.04s!important}
-  .opps .card.on:hover .body .more{transition-delay:.08s!important}
-}
-
-/* KPIs: the numbers land in about a second instead of five */
-.kpis.k-pre .kpis-head h3::before{transition:transform .6s var(--ease-out)}
-.kpis.k-pre .kpis-head>*{transition:opacity .5s ease,transform .6s var(--ease-out)}
-.kpis.k-pre .kpis-head>:nth-child(2){transition-delay:.06s}
-.kpis.k-pre .kpis-head>:nth-child(3){transition-delay:.12s}
-.kpis.k-pre li{transition:opacity .5s ease,transform .6s var(--ease-out);transition-delay:calc(.12s + var(--i)*.07s)}
-.kpis.k-pre .ki{transform:scale(.9);transition:transform .6s var(--ease-out),box-shadow .4s ease;transition-delay:calc(.18s + var(--i)*.07s)}
-.kpis.k-go li:hover .ki{transition:transform .25s var(--ease-out);transition-delay:0s}
-.kpis.k-pre .ki svg *{transition:stroke-dashoffset .9s var(--ease-out);transition-delay:calc(.22s + var(--i)*.07s)}
-.kpis.k-pre b.t{filter:blur(3px);transition:filter .5s ease;transition-delay:calc(.2s + var(--i)*.07s)}
-.kpis.k-pre li::before{transform:scale(.9);transition:opacity .5s ease,transform .6s var(--ease-out);transition-delay:calc(.2s + var(--i)*.07s)}
-
-/* Scroll reveals: .6s instead of 1s, shorter stagger */
-.rv{transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
-.rv.pre{transform:translateY(20px)}
-.rv.d1{transition-delay:.06s}.rv.d2{transition-delay:.12s}.rv.d3{transition-delay:.18s}
-.about .mi{transition:opacity .6s var(--ease-out),transform .6s var(--ease-out);transition-delay:calc(var(--k)*.06s + .05s)}
-.about .mq .mi{transform:translateY(18px)}
-
-/* Contact page form choices: exact properties + press feedback (beats the older .3s "all") */
-.cphero .form .topics span{transition:background .18s ease,color .18s ease,border-color .18s ease,transform .14s var(--ease-out)}
-.cphero .form .topics input+span:active{transform:scale(.96)}
-
-/* Services index + side switch: move with transform, not padding */
-@media (min-width:801px){
-  .sv2-idx button{transition:color .2s ease,translate .3s var(--ease-out)}
-  .sv2-idx button:hover,.sv2-idx button.act{padding-inline-start:0}
-  .sv2-idx button:hover{translate:-10px 0}
-  .sv2-idx button.act{translate:-26px 0}
-  .sv2-idx button::before{inset-inline-start:-26px;width:16px;transform:scaleX(0);transform-origin:right;transition:transform .3s var(--ease-out)}
-  .sv2-idx button.act::before{transform:scaleX(1)}
-}
-.svx{transition:background .25s ease,color .25s ease,padding .25s var(--ease-out)}
-
-/* Touch screens: no hover lifts that stick after a tap */
-@media (hover:none){
-  .arcx-card:hover .arcx-in{transform:none;box-shadow:0 18px 40px -18px rgba(14,18,51,.45)}
-  .card:hover img{transform:none}
-  .opps .card:hover .more::after{transform:none}
-  .svx:hover{padding-left:12px}
-}
-@media (prefers-reduced-motion:reduce){.sv2-idx button,.sv2-idx button.act,.sv2-idx button:hover{translate:none}.sv2-idx button.act{padding-inline-start:26px}}
 
 /* ===== Accessibility: screen-reader-only text, skip link, footer focus ===== */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
