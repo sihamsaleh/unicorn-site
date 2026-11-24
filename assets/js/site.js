@@ -383,7 +383,7 @@
       var H=window.innerHeight,c='';
       if(h&&window.scrollY<H*.5)c='#827188';
       else if(ft&&ft.getBoundingClientRect().top<H-20)c='#1a1d3a';
-      document.body.classList.toggle('at-edge',!!c);if(c)e.style.background=c;
+      document.body.classList.toggle('at-edge',!!c);if(c&&e.dataset.c!==c){e.style.background=c;e.dataset.c=c;document.body.appendChild(e)}
     };
     window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
   })();

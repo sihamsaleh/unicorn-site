@@ -1878,3 +1878,11 @@ main[tabindex="-1"]:focus{outline:none}
   }
 }
 @media (max-width:760px) and (prefers-reduced-motion:reduce){.mft-stars i{animation:none}.mft-draw path{animation:none;stroke-dashoffset:0}}
+
+/* phone: the bottom tint strip sits above the footer drawing, so Safari reads the footer navy */
+@media (max-width:760px){body.at-edge .edge-b{z-index:44}}
+
+/* phone footer: an outlined four-point star in place of the dots between links */
+@media (max-width:760px){
+  .mft-nav .mft-dot{width:11px;height:11px;border-radius:0;opacity:1;background:#e3c993;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 1C10.7 6.6 13.4 9.3 19 10C13.4 10.7 10.7 13.4 10 19C9.3 13.4 6.6 10.7 1 10C6.6 9.3 9.3 6.6 10 1Z' fill='none' stroke='black' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 1C10.7 6.6 13.4 9.3 19 10C13.4 10.7 10.7 13.4 10 19C9.3 13.4 6.6 10.7 1 10C6.6 9.3 9.3 6.6 10 1Z' fill='none' stroke='black' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+}
