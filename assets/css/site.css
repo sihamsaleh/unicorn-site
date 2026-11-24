@@ -1834,3 +1834,12 @@ main[tabindex="-1"]:focus{outline:none}
   #consult-strip .cs-r svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;animation:csNudge 2.8s cubic-bezier(.45,0,.25,1) infinite}
 }
 @media (max-width:760px) and (prefers-reduced-motion:reduce){#consult-strip .cs-m::before,#consult-strip .cs-r svg{animation:none}}
+
+/* Header "more" menu: dark frosted glass (option 1) */
+.nav-more ul{min-width:270px;padding:10px;border-radius:22px;color:#fff;background:rgba(18,22,58,.55);-webkit-backdrop-filter:blur(22px) saturate(1.5);backdrop-filter:blur(22px) saturate(1.5);border:1px solid rgba(255,255,255,.18);box-shadow:0 30px 60px -24px rgba(5,8,30,.7),inset 0 1px 0 rgba(255,255,255,.14)}
+.nav-more li a{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 16px;border-radius:14px;font-size:18px;color:#fff;background:none;transition:background .3s}
+.nav-more li+li a{box-shadow:0 -1px 0 rgba(255,255,255,.1)}
+.nav-more li a::after{content:"←";font-family:system-ui,-apple-system,sans-serif;font-weight:400;opacity:0;transform:translateX(8px);transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.nav-more li a:hover,.nav-more li a[aria-current="page"]{background:rgba(255,255,255,.12);color:#fff}
+.nav-more li a:hover::after{opacity:1;transform:none}
+.hdr.solid .nav-more ul{background:rgba(18,22,58,.88)}
