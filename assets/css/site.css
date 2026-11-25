@@ -1892,3 +1892,6 @@ main[tabindex="-1"]:focus{outline:none}
 
 /* phone footer: the tagline a little lower and a little larger */
 @media (max-width:760px){.mft-head{gap:22px}.mft-tg{font-size:17.5px}}
+
+/* «اعرض عقارك» button: a little more room under the title */
+.lyp .lyp-b{margin-top:clamp(18px,2vw,28px)}
